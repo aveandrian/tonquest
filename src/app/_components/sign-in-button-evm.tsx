@@ -43,7 +43,6 @@ export default function SingInButtonEVM() {
 
   useEffect(() => {
     async function checkIsConnected() {
-      console.log(isConnected);
       if (isConnected && !session) {
         await handleLogin();
       }

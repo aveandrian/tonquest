@@ -264,7 +264,7 @@ export const authOptions: NextAuthOptions = {
           placeholder: "0x0",
         },
       },
-      authorize: async (credentials, req) => {
+      authorize: async (credentials) => {
         try {
           const currentUser: PrismaUser = JSON.parse(
             credentials?.currentUser ?? "{}",
