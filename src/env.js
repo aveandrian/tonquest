@@ -37,7 +37,6 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: z.string()
   },
 
   /**
@@ -55,7 +54,6 @@ export const env = createEnv({
     TWITTER_SECRET: process.env.TWITTER_SECRET, 
     JWT_SECRET: process.env.JWT_SECRET, 
     TON_API_KEY: process.env.TON_API_KEY, 
-    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
