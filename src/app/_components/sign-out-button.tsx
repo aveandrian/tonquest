@@ -12,9 +12,17 @@ export default function SignOutButton() {
   const wallet = useTonWallet();
   const [tonConnectUI] = useTonConnectUI();
 
+  const disconnectMetamask = () => {
+    const timer = setTimeout(() => {
+      disconnect();
+    }, 100);
+
+    return () => clearTimeout(timer);
+  };
+
   const handleSignOut = () => {
     void signOut();
-    if (isConnected) disconnect();
+    if (isConnected) disconnectMetamask();
     if (wallet) void tonConnectUI.disconnect();
   };
   return <Button onClick={handleSignOut}>SIGN OUT</Button>;
