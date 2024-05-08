@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import {
+  DefaultUser,
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
@@ -169,20 +170,21 @@ export const authOptions: NextAuthOptions = {
       },
       authorize: async (credentials, req) => {
         try {
-          if (!credentials?.message) {
-            throw new Error("SiweMessage is undefined");
-          }
-
-          const currentUser: PrismaUser | null = JSON.parse(
+          const currentUser: PrismaUser = JSON.parse(
             credentials?.currentUser ?? "{}",
           );
-          const currentMessage: SiweMessage = JSON.parse(credentials.message);
+          const currentMessage: SiweMessage = JSON.parse(
+            credentials?.message ?? "{}",
+          );
 
-          const siwe = new SiweMessage(credentials.message);
-          const nonce = await getCsrfToken({ req: { headers: req.headers } });
+          const siwe = new SiweMessage(
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+            JSON.parse(credentials?.message ?? "{}"),
+          );
+
           const result = await siwe.verify({
-            signature: credentials?.signature || "",
-            nonce,
+            signature: credentials?.signature ?? "",
+            nonce: await getCsrfToken({ req }),
           });
 
           const isExistingUser = await db.user.findFirst({
@@ -262,9 +264,9 @@ export const authOptions: NextAuthOptions = {
           placeholder: "0x0",
         },
       },
-      authorize: async (credentials) => {
+      authorize: async (credentials, req) => {
         try {
-          const currentUser: PrismaUser | null = JSON.parse(
+          const currentUser: PrismaUser = JSON.parse(
             credentials?.currentUser ?? "{}",
           );
           const walletInfo: Wallet | null = JSON.parse(

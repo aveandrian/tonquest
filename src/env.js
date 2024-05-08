@@ -27,8 +27,9 @@ export const env = createEnv({
     TWITTER_ID:  z.string(),
     TWITTER_SECRET:  z.string(),  
     JWT_SECRET: z.string(),
-    TON_API_KEY: z.string(),
+    TON_API_KEY: z.string()
   },
+  
 
   /**
    * Specify your client-side environment variables schema here. This way you can ensure the app
@@ -36,7 +37,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: z.string()
   },
 
   /**
@@ -54,6 +55,7 @@ export const env = createEnv({
     TWITTER_SECRET: process.env.TWITTER_SECRET, 
     JWT_SECRET: process.env.JWT_SECRET, 
     TON_API_KEY: process.env.TON_API_KEY, 
+    NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID: process.env.NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

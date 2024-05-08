@@ -8,8 +8,7 @@ import { TRPCReactProvider } from "@/trpc/react";
 import { Providers } from "./providers";
 import { getServerAuthSession } from "@/server/auth";
 import { ContextSessionProviders } from "@/ContextSessionProviders";
-import { TonBackendAuthProvider } from './TonBackendAuth';
-
+import { TonBackendAuthProvider } from "./TonBackendAuth";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,21 +26,20 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const serverSession = await getServerAuthSession();
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`} suppressHydrationWarning={true}>
-      <Providers>
-        <TRPCReactProvider>
-          <ContextSessionProviders serverSession={serverSession}>
-          <TonBackendAuthProvider >
-            {children}
-            </TonBackendAuthProvider>
-          </ContextSessionProviders>
-        </TRPCReactProvider>
-      </Providers>
-       
+      <body
+        className={`font-sans ${inter.variable}`}
+        suppressHydrationWarning={true}
+      >
+        <Providers>
+          <TRPCReactProvider>
+            <ContextSessionProviders serverSession={serverSession}>
+              <TonBackendAuthProvider>{children}</TonBackendAuthProvider>
+            </ContextSessionProviders>
+          </TRPCReactProvider>
+        </Providers>
       </body>
     </html>
   );

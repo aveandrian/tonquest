@@ -1,15 +1,14 @@
-'use client'
+"use client";
 
-import { type ReactNode } from 'react'
-import { WagmiProvider } from 'wagmi'
+import { type ReactNode } from "react";
+import { WagmiProvider } from "wagmi";
 
-import { config } from '@/wagmi'
+import { config } from "@/wagmi";
 
-import { TonConnectUIProvider } from '@tonconnect/ui-react';
+import { TonConnectUIProvider } from "@tonconnect/ui-react";
 
-import { TonBackendAuthProvider } from './TonBackendAuth';
+import { TonBackendAuthProvider } from "./TonBackendAuth";
 export function Providers(props: { children: ReactNode }) {
-
   return (
     <WagmiProvider config={config}>
       <TonConnectUIProvider manifestUrl="https://ton-achievements.vercel.app/tonconnect-manifest.json">
@@ -20,5 +19,5 @@ export function Providers(props: { children: ReactNode }) {
         {/* </TonBackendAuthProvider> */}
       </TonConnectUIProvider>
     </WagmiProvider>
-  )
+  );
 }

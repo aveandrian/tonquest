@@ -3,12 +3,13 @@
 import { Button } from "flowbite-react";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
+import { useDisconnect } from "wagmi";
 
 const PROVIDER_MAP: Record<string, string> = {
   discord: "discordHandle",
   twitter: "twitterHandle",
-  evm: "address",
-  ton: "ton_address",
+  Ethereum: "address",
+  TON: "ton_address",
 };
 
 export default function RemoveAccountButton({
@@ -16,11 +17,15 @@ export default function RemoveAccountButton({
 }: {
   provider: string;
 }) {
+  const { disconnect } = useDisconnect();
+
   const router = useRouter();
   const removeAccount = api.account.deleteSpecificUserAccount.useMutation({
-    onSuccess: (x) => {
-      console.log(x);
+    onSuccess: () => {
       router.refresh();
+      if (provider === "Ethereum") {
+        disconnect();
+      }
     },
   });
 
