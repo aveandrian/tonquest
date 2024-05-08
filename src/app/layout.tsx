@@ -1,8 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import "@/styles/globals.css";
 
 import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
+
+import { Providers } from "./providers";
+import { getServerAuthSession } from "@/server/auth";
+import { ContextSessionProviders } from "@/ContextSessionProviders";
+import { TonBackendAuthProvider } from './TonBackendAuth';
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -15,15 +22,26 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
+  const serverSession = await getServerAuthSession();
   return (
     <html lang="en">
-      <body className={`font-sans ${inter.variable}`}>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body className={`font-sans ${inter.variable}`} suppressHydrationWarning={true}>
+      <Providers>
+        <TRPCReactProvider>
+          <ContextSessionProviders serverSession={serverSession}>
+          <TonBackendAuthProvider >
+            {children}
+            </TonBackendAuthProvider>
+          </ContextSessionProviders>
+        </TRPCReactProvider>
+      </Providers>
+       
       </body>
     </html>
   );

@@ -24,6 +24,10 @@ export const env = createEnv({
     ),
     DISCORD_CLIENT_ID: z.string(),
     DISCORD_CLIENT_SECRET: z.string(),
+    TWITTER_ID:  z.string(),
+    TWITTER_SECRET:  z.string(),  
+    JWT_SECRET: z.string(),
+    TON_API_KEY: z.string(),
   },
 
   /**
@@ -46,6 +50,10 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     DISCORD_CLIENT_ID: process.env.DISCORD_CLIENT_ID,
     DISCORD_CLIENT_SECRET: process.env.DISCORD_CLIENT_SECRET,
+    TWITTER_ID:  process.env.TWITTER_ID,
+    TWITTER_SECRET: process.env.TWITTER_SECRET, 
+    JWT_SECRET: process.env.JWT_SECRET, 
+    TON_API_KEY: process.env.TON_API_KEY, 
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

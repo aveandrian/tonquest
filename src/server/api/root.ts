@@ -1,5 +1,8 @@
 import { postRouter } from "@/server/api/routers/post";
 import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
+import { userRouter } from "@/server/api/routers/user";
+import { accountRouter } from "@/server/api/routers/account";
+import { tonApiRouter } from "./routers/ton-api";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +11,9 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   post: postRouter,
+  user: userRouter,
+  account: accountRouter,
+  tonApi: tonApiRouter,
 });
 
 // export type definition of API
