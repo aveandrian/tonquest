@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import {
   useIsConnectionRestored,
   useTonConnectUI,
@@ -13,15 +13,12 @@ export function useBackendAuth() {
   const isConnectionRestored = useIsConnectionRestored();
   const wallet = useTonWallet();
   const [tonConnectUI] = useTonConnectUI();
-  const interval = useRef<ReturnType<typeof setInterval> | undefined>();
   const { data: session } = useSession();
 
   useEffect(() => {
     if (!isConnectionRestored) {
       return;
     }
-
-    clearInterval(interval.current);
 
     if (!wallet) {
       const refreshPayload = async () => {
@@ -42,8 +39,7 @@ export function useBackendAuth() {
       return;
     }
 
-    const token = localStorage.getItem(localStorageKey);
-    if (token) {
+    if (session) {
       console.log("set token!");
       // setToken(token);
       return;
@@ -57,27 +53,10 @@ export function useBackendAuth() {
 
       void signIn("ton", {
         walletInfo: JSON.stringify(wallet),
-        currentUser: session?.user ? JSON.stringify(session?.user) : null,
       });
-      // tonProof.mutate({ walletInfo: wallet})
-      // void client.wallet.tonConnectProof({
-      //     address: c as string,
-      //     proof: wallet.connectItems?.tonProof as TonProofItemReplySuccess['proof'],
-      // })
 
       localStorage.setItem(localStorageKey, "verified");
-
-      // backendAuth.checkProof(wallet.connectItems.tonProof.proof, wallet.account).then(result => {
-      //     if (result) {
-      //         setToken(result);
-      //         localStorage.setItem(localStorageKey, result);
-      //     } else {
-      //         alert('Please try another wallet');
-      //         tonConnectUI.disconnect();
-      //     }
-      // })
     } else {
-      alert("Please try another wallet");
       void tonConnectUI.disconnect();
     }
 

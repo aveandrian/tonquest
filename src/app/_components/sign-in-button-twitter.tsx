@@ -1,11 +1,12 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Button } from "flowbite-react";
+import { Button } from "@nextui-org/react";
 
 export default function SingInButtonTwitter() {
-
   return (
-      <Button onClick={() => signIn("twitter", { callbackUrl: '/profile'})}>Connect Twitter</Button>
-  )
+    <Button onClick={() => signIn("twitter", { callbackUrl: "/profile" })}>
+      Connect Twitter
+    </Button>
+  );
 }

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import {
-  DefaultUser,
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
@@ -39,8 +38,10 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      address?: string;
-      ton_addres?: string;
+      address?: string | null;
+      discord?: string | null;
+      twitter?: string | null;
+      tonAddress?: string | null;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -55,6 +56,13 @@ declare module "next-auth" {
     // ...other properties
     // role: UserRole;
   }
+
+  interface Profile {
+    username: string;
+    data: {
+      username: string;
+    };
+  }
 }
 
 /**
@@ -68,31 +76,58 @@ export const authOptions: NextAuthOptions = {
   },
   debug: process.env.NODE_ENV === "development",
   callbacks: {
+    jwt: async ({ token, user, profile, account, session, trigger }) => {
+      const isSignIn = user ? true : false;
+
+      if (isSignIn) {
+        let twitterHandle, discordHandle;
+        account?.provider === "discord"
+          ? (discordHandle = profile?.username)
+          : (discordHandle = user.discordHandle);
+        account?.provider === "twitter"
+          ? (twitterHandle = profile?.data.username)
+          : (twitterHandle = user.twitterHandle);
+
+        return {
+          ...token,
+          id: user.id,
+          address: user.address,
+          tonAddress: user.ton_address,
+          discord: discordHandle,
+          twitter: twitterHandle,
+        };
+      }
+
+      if (
+        trigger === "update" &&
+        (session as Record<string, string>)?.discord !== undefined
+      ) {
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.discord = (session as Record<string, string>).discord;
+      }
+
+      if (
+        trigger === "update" &&
+        (session as Record<string, string>)?.twitter !== undefined
+      ) {
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.discord = (session as Record<string, string>)?.twitter;
+      }
+
+      return Promise.resolve(token);
+    },
     session: ({ session, token }) => {
-      console.log("token", token);
-      console.log("token.sub", token.sub);
       return {
         ...session,
         user: {
           ...session.user,
-          id: token.sub,
-          // id: user.id
+          id: token.id,
+          address: token.address,
+          discord: token.discord,
+          twitter: token.twitter,
+          tonAddress: token.tonAddress,
         },
       };
-    },
-    jwt: async ({ token, user }) => {
-      console.log("user in jwt", user);
-      const isSignIn = user ? true : false;
-
-      if (isSignIn) {
-        token.user = {
-          id: user.id,
-          address: user.address,
-          tonAddress: user.tonAddress,
-        };
-      }
-
-      return Promise.resolve(token);
     },
   },
   events: {
@@ -259,21 +294,12 @@ export const authOptions: NextAuthOptions = {
           label: "Message",
           type: "object",
         },
-        currentUser: {
-          type: "text",
-          placeholder: "0x0",
-        },
       },
       authorize: async (credentials) => {
         try {
-          const currentUser: PrismaUser = JSON.parse(
-            credentials?.currentUser ?? "{}",
-          );
           const walletInfo: Wallet | null = JSON.parse(
             credentials?.walletInfo ?? "{}",
           );
-
-          console.log("walletInfo in creds", walletInfo);
 
           if (!walletInfo) return null;
 
@@ -307,7 +333,7 @@ export const authOptions: NextAuthOptions = {
             return isExistingUser;
           }
 
-          if (verifyRes && !currentUser && !isExistingUser) {
+          if (verifyRes && !isExistingUser) {
             console.log("User doesn't exist");
 
             const newUserModel = await db.user.create({
@@ -327,31 +353,8 @@ export const authOptions: NextAuthOptions = {
             });
 
             return newUserModel;
-          } else if (verifyRes && currentUser && !currentUser.ton_address) {
-            console.log("currentUser", currentUser);
-            console.log("User exist but doesn't have TON address");
-            const updatedUser = await db.user.update({
-              where: {
-                id: currentUser.id,
-              },
-              data: {
-                ton_address: walletInfo.account.address,
-              },
-            });
-
-            await db.account.create({
-              data: {
-                userId: currentUser.id,
-                type: "credentials",
-                provider: "TON",
-                providerAccountId: walletInfo.account.address ?? "",
-              },
-            });
-
-            return updatedUser;
           }
 
-          console.log("verifyRes", verifyRes);
           return null;
         } catch (error) {
           // Uncomment or add logging if needed

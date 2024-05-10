@@ -3,6 +3,8 @@ import { createCallerFactory, createTRPCRouter } from "@/server/api/trpc";
 import { userRouter } from "@/server/api/routers/user";
 import { accountRouter } from "@/server/api/routers/account";
 import { tonApiRouter } from "./routers/ton-api";
+import { questRouter } from "./routers/quest";
+import { questStepRouter } from "./routers/quest-steps";
 
 /**
  * This is the primary router for your server.
@@ -14,6 +16,8 @@ export const appRouter = createTRPCRouter({
   user: userRouter,
   account: accountRouter,
   tonApi: tonApiRouter,
+  quest: questRouter,
+  questStep: questStepRouter,
 });
 
 // export type definition of API

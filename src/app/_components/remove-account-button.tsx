@@ -1,9 +1,10 @@
 "use client";
 
-import { Button } from "flowbite-react";
+import { Button } from "@nextui-org/react";
 import { api } from "@/trpc/react";
 import { useRouter } from "next/navigation";
 import { useDisconnect } from "wagmi";
+import { useSession } from "next-auth/react";
 
 const PROVIDER_MAP: Record<string, string> = {
   discord: "discordHandle",
@@ -18,11 +19,20 @@ export default function RemoveAccountButton({
   provider: string;
 }) {
   const { disconnect } = useDisconnect();
+  const { update } = useSession();
 
   const router = useRouter();
   const removeAccount = api.account.deleteSpecificUserAccount.useMutation({
-    onSuccess: () => {
-      router.refresh();
+    onSuccess: async () => {
+      if (provider === "twitter") {
+        await update({ twitter: null });
+      }
+
+      if (provider === "discord") {
+        await update({ discord: null });
+      }
+
+      // router.refresh();
       if (provider === "Ethereum") {
         disconnect();
       }
@@ -30,15 +40,18 @@ export default function RemoveAccountButton({
   });
 
   return (
-    <Button
-      onClick={() =>
-        removeAccount.mutate({
-          provider: provider,
-          fieldInDb: PROVIDER_MAP[provider] ?? "",
-        })
-      }
-    >
-      Remove account
-    </Button>
+    <>
+      <Button
+        className="ml-auto"
+        onClick={() =>
+          removeAccount.mutate({
+            provider: provider,
+            fieldInDb: PROVIDER_MAP[provider] ?? "",
+          })
+        }
+      >
+        Remove account
+      </Button>
+    </>
   );
 }

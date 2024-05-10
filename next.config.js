@@ -18,6 +18,16 @@ const config = {
             hostname: 'pbs.twimg.com',
             port: '',
           },
+          {
+            protocol: 'https',
+            hostname: 'flowbite.s3.amazonaws.com',
+            port: '',
+          },
+          {
+            protocol: 'https',
+            hostname: 'flowbite.com',
+            port: '',
+          },
         ],
       },
 };

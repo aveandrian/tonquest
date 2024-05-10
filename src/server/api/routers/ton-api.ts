@@ -57,8 +57,6 @@ export const tonApiRouter = createTRPCRouter({
         parsedMessage.Signature,
       );
 
-      console.log("verifyRes", verifyRes);
-
       return verifyRes;
     }),
 });

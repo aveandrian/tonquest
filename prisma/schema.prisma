@@ -57,18 +57,19 @@ model Session {
 }
 
 model User {
-    id            String    @id @default(cuid())
-    name          String?
-    address       String?   @unique
-    ton_address   String?   @unique
-    email         String?   @unique
-    emailVerified DateTime?
-    image         String?
-    accounts      Account[]
-    sessions      Session[]
-    posts         Post[]
-    twitterHandle String?
-    discordHandle String?
+    id                String              @id @default(cuid())
+    name              String?
+    address           String?             @unique
+    ton_address       String?             @unique
+    email             String?             @unique
+    emailVerified     DateTime?
+    image             String?
+    accounts          Account[]
+    sessions          Session[]
+    posts             Post[]
+    twitterHandle     String?
+    discordHandle     String?
+    UserQuestProgress UserQuestProgress[]
 }
 
 model VerificationToken {
@@ -91,4 +92,35 @@ model wallets {
     wallet_string String?
     nft_id        String?
     is_minted     Boolean?
+}
+
+model Quest {
+    quest_id          Int                 @id @default(autoincrement())
+    quest_slug        String              @unique
+    quest_name        String
+    quest_description String
+    steps             QuestStep[]
+    UserQuestProgress UserQuestProgress[]
+}
+
+model QuestStep {
+    step_id           Int                 @id @default(autoincrement())
+    quest_id          Int
+    quest             Quest               @relation(fields: [quest_id], references: [quest_id])
+    step_type         Int
+    step_title        String
+    step_description  String
+    step_order        Int
+    UserQuestProgress UserQuestProgress[]
+}
+
+model UserQuestProgress {
+    progress_id     Int       @id @default(autoincrement())
+    userId          String
+    user            User      @relation(fields: [userId], references: [id])
+    quest_id        Int
+    quest           Quest     @relation(fields: [quest_id], references: [quest_id])
+    current_step_id Int
+    step            QuestStep @relation(fields: [current_step_id], references: [step_id])
+    completed       Boolean
 }

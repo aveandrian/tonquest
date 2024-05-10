@@ -9,6 +9,12 @@ import { Providers } from "./providers";
 import { getServerAuthSession } from "@/server/auth";
 import { ContextSessionProviders } from "@/ContextSessionProviders";
 import { TonBackendAuthProvider } from "./TonBackendAuth";
+import Navigation from "./_components/navigation";
+import { NextUIProvider } from "@nextui-org/react";
+
+import { config } from "@fortawesome/fontawesome-svg-core";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+config.autoAddCss = false;
 
 const inter = Inter({
   subsets: ["latin"],
@@ -30,13 +36,18 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-sans ${inter.variable}`}
+        className={`font-sans ${inter.variable} min-h-screen bg-background text-foreground dark`}
         suppressHydrationWarning={true}
       >
         <Providers>
           <TRPCReactProvider>
             <ContextSessionProviders serverSession={serverSession}>
-              <TonBackendAuthProvider>{children}</TonBackendAuthProvider>
+              <TonBackendAuthProvider>
+                <NextUIProvider>
+                  <Navigation />
+                  {children}
+                </NextUIProvider>
+              </TonBackendAuthProvider>
             </ContextSessionProviders>
           </TRPCReactProvider>
         </Providers>
