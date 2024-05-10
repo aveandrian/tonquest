@@ -2,7 +2,6 @@
 
 import { Button } from "@nextui-org/react";
 import { api } from "@/trpc/react";
-import { useRouter } from "next/navigation";
 import { useDisconnect } from "wagmi";
 import { useSession } from "next-auth/react";
 
