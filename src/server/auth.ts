@@ -61,6 +61,7 @@ declare module "next-auth" {
     username: string;
     data: {
       username: string;
+      name: string;
     };
   }
 }
@@ -81,11 +82,12 @@ export const authOptions: NextAuthOptions = {
 
       if (isSignIn) {
         let twitterHandle, discordHandle;
+        console.log("profile", profile);
         account?.provider === "discord"
           ? (discordHandle = profile?.username)
           : (discordHandle = user.discordHandle);
         account?.provider === "twitter"
-          ? (twitterHandle = profile?.data.username)
+          ? (twitterHandle = profile?.data.name)
           : (twitterHandle = user.twitterHandle);
 
         return {
