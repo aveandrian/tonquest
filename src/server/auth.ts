@@ -111,7 +111,7 @@ export const authOptions: NextAuthOptions = {
         (session as Record<string, string>)?.twitter !== undefined
       ) {
         // Note, that `session` can be any arbitrary object, remember to validate it!
-        token.discord = (session as Record<string, string>)?.twitter;
+        token.twitter = (session as Record<string, string>)?.twitter;
       }
 
       return Promise.resolve(token);
