@@ -26,7 +26,7 @@ export default function SignOutButton() {
     if (wallet) void tonConnectUI.disconnect();
   };
   return (
-    <Button className="mt-7" onClick={handleSignOut}>
+    <Button fullWidth onClick={handleSignOut}>
       SIGN OUT
     </Button>
   );
