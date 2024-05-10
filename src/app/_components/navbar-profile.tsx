@@ -1,8 +1,4 @@
 "use client";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
-import SingInButtonTON from "./sign-in-button-ton";
-import { useSession } from "next-auth/react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -14,7 +10,6 @@ import {
 import SignOutButton from "./sign-out-button";
 
 export default function NavbarProfile() {
-  const session = useSession();
   return (
     <Dropdown>
       <DropdownTrigger>

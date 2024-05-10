@@ -21,7 +21,6 @@ export default function RemoveAccountButton({
   const { disconnect } = useDisconnect();
   const { update } = useSession();
 
-  const router = useRouter();
   const removeAccount = api.account.deleteSpecificUserAccount.useMutation({
     onSuccess: async () => {
       if (provider === "twitter") {

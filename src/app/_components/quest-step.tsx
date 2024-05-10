@@ -1,7 +1,7 @@
 "use client";
 
 import { Button, Link } from "@nextui-org/react";
-import { type User, type QuestStep } from "@prisma/client";
+import { type QuestStep } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 

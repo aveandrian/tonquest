@@ -1,6 +1,6 @@
 "use client";
 
-import { type User, type QuestStep } from "@prisma/client";
+import { type QuestStep } from "@prisma/client";
 import { QuestStepComponent } from "./quest-step";
 import { useState } from "react";
 

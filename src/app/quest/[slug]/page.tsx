@@ -1,5 +1,4 @@
 import { QuestStepsWrapper } from "@/app/_components/quest-steps-wrapper";
-import { getServerAuthSession } from "@/server/auth";
 import { api } from "@/trpc/server";
 import { type Quest } from "@prisma/client";
 
