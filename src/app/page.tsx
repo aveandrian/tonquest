@@ -1,14 +1,22 @@
 "use client";
 import { Button, Link } from "@nextui-org/react";
-import { useSession } from "next-auth/react";
+import { signOut, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, update } = useSession();
+
+  // useEffect(() => {
+  //   async function updateCurrentSession() {
+  //     await signOut();
+  //     // await update();
+  //   }
+  //   if (session) void updateCurrentSession();
+  // }, [session]);
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
@@ -16,7 +24,6 @@ export default function Home() {
     if (!session) {
       setShowPopup(true);
       setTimeout(() => setShowPopup(false), 3000);
-      console.log("showpopup");
     } else router.push("quest/first-quest");
   }
   return (

@@ -52,12 +52,12 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
   if (!currentStepInfo) return null;
 
   return (
-    <div className="grid w-full	grid-cols-2 gap-x-5">
-      <div className="mt-auto">
+    <div className="grid h-full	w-full grid-cols-3 gap-x-5 sm:flex">
+      <div className="col-span-1 mt-auto sm:hidden">
         {stepsInfo.map((step, i) => (
           <div
             key={step.step_id}
-            className={`rounded-md border-2 border-solid p-2 ${currentStepInfo.step_order === i && "bg-gray-300"}`}
+            className={`grid-cols-1 rounded-md border-2 border-solid p-2 ${currentStepInfo.step_order === i && "bg-gray-300"}`}
           >
             {step.step_title}
           </div>

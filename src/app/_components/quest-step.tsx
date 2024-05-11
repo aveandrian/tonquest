@@ -29,7 +29,7 @@ export function QuestStepComponent({
   }
 
   return (
-    <div className="border-1-black flex h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-2 border-double border-indigo-200 p-5">
+    <div className="border-1-black col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-2 border-double border-indigo-200 p-5">
       <div className="flex h-full flex-col items-center justify-center gap-5">
         <h1 className="mt-5 text-center text-3xl font-bold">
           {stepInfo.step_title}
