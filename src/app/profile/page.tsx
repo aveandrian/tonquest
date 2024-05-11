@@ -8,6 +8,7 @@ import SingInButtonTON from "../_components/sign-in-button-ton";
 import SignOutButton from "../_components/sign-out-button";
 import { useSession } from "next-auth/react";
 import { useTonAddress } from "@tonconnect/ui-react";
+import { Spinner } from "@nextui-org/react";
 
 export default function Profile() {
   const { data: session } = useSession();
@@ -16,14 +17,18 @@ export default function Profile() {
   if (!session) redirect("/");
   return (
     <main className="flex min-h-[90vh] w-full flex-col items-center border-2 border-solid px-6">
-      <div className="mt-5 flex flex-col items-center gap-5">
+      <div className="mt-5 flex h-full w-full max-w-[1024px] flex-col items-center gap-5">
         <h1 className="text-center text-4xl">Profile page</h1>
         <div className="flex w-full flex-col  gap-4">
           <h2 className="text-2xl">TON Wallet:</h2>
           <div className="flex flex-row items-center gap-2">
             {session.user.tonAddress ? (
               <>
-                <p>{userFriendlyAddress}</p>
+                {userFriendlyAddress ? (
+                  <p>{userFriendlyAddress}</p>
+                ) : (
+                  <Spinner />
+                )}
               </>
             ) : (
               <SingInButtonTON />

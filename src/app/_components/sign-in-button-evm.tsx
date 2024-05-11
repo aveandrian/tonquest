@@ -53,6 +53,7 @@ export default function SingInButtonEVM() {
 
   return (
     <Button
+      color="primary"
       onClick={(e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if (!isConnected) {

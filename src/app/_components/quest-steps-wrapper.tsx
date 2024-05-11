@@ -2,23 +2,73 @@
 
 import { type QuestStep } from "@prisma/client";
 import { QuestStepComponent } from "./quest-step";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { api } from "@/trpc/react";
 
 export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
-  const [currentStep, setCurrentStep] = useState<number>(0);
+  const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
+  const [currentStepInfo, setCurrentStepInfo] = useState<QuestStep | undefined>(
+    stepsInfo[currentStepIndex],
+  );
+  const [isLastStep, setIsLastStep] = useState<boolean>(
+    currentStepIndex === stepsInfo.length - 1,
+  );
+
+  const { data: userQuestProgress, isLoading: isUserQuestProgressLoading } =
+    api.questProgress.getUserQuestProgress.useQuery({
+      questId: currentStepInfo?.quest_id ?? -1,
+    });
+
+  const sendStepCompleted = api.questProgress.updateUserProgress.useMutation({
+    onSuccess: () => {
+      setCurrentStepIndex((prev) => prev + 1);
+    },
+  });
+
+  useEffect(() => {
+    setCurrentStepInfo(stepsInfo[currentStepIndex]);
+    setIsLastStep(currentStepIndex === stepsInfo.length - 1);
+  }, [currentStepIndex, stepsInfo]);
+
+  useEffect(() => {
+    if (userQuestProgress)
+      setCurrentStepIndex(
+        userQuestProgress?.current_step_id
+          ? userQuestProgress?.current_step_id
+          : 0,
+      );
+  }, [userQuestProgress]);
+
   async function handleStepChange(amount: number) {
-    setCurrentStep((prev) => prev + amount);
+    if (amount > 0 && currentStepInfo) {
+      sendStepCompleted.mutate({
+        questId: currentStepInfo?.quest_id,
+        completedStepId: currentStepInfo?.step_id,
+        isLastStep: isLastStep,
+      });
+    } else setCurrentStepIndex((prev) => prev + amount);
   }
-  const isLastStep: boolean = currentStep === stepsInfo.length - 1;
-  const currentStepInfo: QuestStep | undefined = stepsInfo[currentStep];
 
   if (!currentStepInfo) return null;
 
   return (
-    <QuestStepComponent
-      isLastStep={isLastStep}
-      stepInfo={currentStepInfo}
-      handleStepChange={handleStepChange}
-    />
+    <div className="grid w-full	grid-cols-2 gap-x-5">
+      <div className="mt-auto">
+        {stepsInfo.map((step, i) => (
+          <div
+            key={step.step_id}
+            className={`rounded-md border-2 border-solid p-2 ${currentStepInfo.step_order === i && "bg-gray-300"}`}
+          >
+            {step.step_title}
+          </div>
+        ))}
+      </div>
+      <QuestStepComponent
+        isLastStep={isLastStep}
+        stepInfo={currentStepInfo}
+        handleStepChange={handleStepChange}
+        isButtonLoading={sendStepCompleted.isPending}
+      />
+    </div>
   );
 }

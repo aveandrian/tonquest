@@ -5,7 +5,10 @@ import { Button } from "@nextui-org/react";
 
 export default function SingInButtonTwitter() {
   return (
-    <Button onClick={() => signIn("twitter", { callbackUrl: "/profile" })}>
+    <Button
+      onClick={() => signIn("twitter", { callbackUrl: "/profile" })}
+      color="primary"
+    >
       Connect Twitter
     </Button>
   );

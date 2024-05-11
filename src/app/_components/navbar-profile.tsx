@@ -11,9 +11,9 @@ import SignOutButton from "./sign-out-button";
 
 export default function NavbarProfile() {
   return (
-    <Dropdown>
+    <Dropdown className="bg-background">
       <DropdownTrigger>
-        <Button variant="bordered">Open Menu</Button>
+        <Button color="primary">MENU</Button>
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         <DropdownItem key="profile">
@@ -23,6 +23,7 @@ export default function NavbarProfile() {
             color="primary"
             variant="solid"
             fullWidth={true}
+            className="uppercase"
           >
             Profile
           </Button>

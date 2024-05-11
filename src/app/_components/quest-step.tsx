@@ -9,10 +9,12 @@ export function QuestStepComponent({
   stepInfo,
   handleStepChange,
   isLastStep,
+  isButtonLoading,
 }: {
   stepInfo: QuestStep;
   handleStepChange: (x: number) => void;
   isLastStep: boolean;
+  isButtonLoading: boolean;
 }) {
   const { data: session } = useSession();
   const isTwitterQuest = stepInfo.step_type === 1;
@@ -43,6 +45,7 @@ export function QuestStepComponent({
             href="https://twitter.com/aveandrian"
             as={Link}
             variant="solid"
+            className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"}`}
             fullWidth={true}
             isExternal
             showAnchorIcon
@@ -59,12 +62,16 @@ export function QuestStepComponent({
       </div>
       <div className="mt-auto flex w-full flex-row">
         {stepInfo.step_order > 0 && (
-          <Button onClick={() => handleStepChange(-1)}>Back</Button>
+          <Button onClick={() => handleStepChange(-1)} color="secondary">
+            Back
+          </Button>
         )}
         <Button
           onClick={() => handleStepChange(1)}
           isDisabled={isLastStep || (isTwitterQuest && !isFollowClicked)}
           className="ml-auto"
+          color="primary"
+          isLoading={isButtonLoading}
         >
           Next
         </Button>

@@ -1,12 +1,18 @@
 import { QuestStepsWrapper } from "@/app/_components/quest-steps-wrapper";
+import { getServerAuthSession } from "@/server/auth";
 import { api } from "@/trpc/server";
 import { type Quest } from "@prisma/client";
+import { redirect } from "next/navigation";
 
 export default async function QuestWrapper({
   params,
 }: {
   params: { slug: string };
 }) {
+  const session = await getServerAuthSession();
+
+  if (!session) redirect("/");
+
   const questInfo: Quest | null = await api.quest.getQuestBySlug({
     slug: params.slug,
   });

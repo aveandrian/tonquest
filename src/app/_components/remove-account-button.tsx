@@ -41,6 +41,7 @@ export default function RemoveAccountButton({
     <>
       <Button
         className="ml-auto"
+        color="danger"
         onClick={() =>
           removeAccount.mutate({
             provider: provider,

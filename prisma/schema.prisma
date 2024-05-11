@@ -123,4 +123,6 @@ model UserQuestProgress {
     current_step_id Int
     step            QuestStep @relation(fields: [current_step_id], references: [step_id])
     completed       Boolean
+
+    @@unique([userId, quest_id])
 }
