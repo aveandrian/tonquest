@@ -25,6 +25,18 @@ export default {
       "2xl": { min: "1536px" },
       // => @media (min-width: 1536px) { ... }
     },
+    extend: {
+      colors: {
+        blue: "#01204E",
+        teal: "#028391",
+        peachYellow: "#F6DCAC",
+        sandyBrown: "#FAA968",
+        giantsOrange: "#F85525",
+      },
+      backgroundImage: {
+        "hero-pattern": "url('bg-main.png')",
+      },
+    },
   },
   plugins: [
     nextui({

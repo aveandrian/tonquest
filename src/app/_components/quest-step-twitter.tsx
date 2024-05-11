@@ -29,9 +29,7 @@ export function QuestStepTwitterComponent({
   return (
     <div className="border-1-black flex h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-2 border-double border-indigo-200 p-5">
       <div className="flex h-full flex-col items-center justify-center gap-5">
-        <h1 className="mt-5 text-center text-3xl font-bold">
-          {stepInfo.step_title}
-        </h1>
+        <h1 className="mt-5 text-center text-3xl ">{stepInfo.step_title}</h1>
         <p className="w-3/4 text-center text-lg">{stepInfo.step_description}</p>
         {!session && <h2>Connect wallet first</h2>}
 

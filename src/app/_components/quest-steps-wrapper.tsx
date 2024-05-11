@@ -4,6 +4,8 @@ import { type QuestStep } from "@prisma/client";
 import { QuestStepComponent } from "./quest-step";
 import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
@@ -53,13 +55,16 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
 
   return (
     <div className="grid h-full	w-full grid-cols-3 gap-x-5 sm:flex">
-      <div className="col-span-1 mt-auto sm:hidden">
+      <div className="col-span-1 mt-auto flex flex-col gap-1 sm:hidden">
         {stepsInfo.map((step, i) => (
           <div
             key={step.step_id}
-            className={`grid-cols-1 rounded-md border-2 border-solid p-2 ${currentStepInfo.step_order === i && "bg-gray-300"}`}
+            className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo.step_order === i ? "bg-sandyBrown border-sandyBrown" : "bg-peachYellow border-peachYellow"}`}
           >
-            {step.step_title}
+            {userQuestProgress && i < userQuestProgress?.current_step_id && (
+              <FontAwesomeIcon icon={faCheckCircle} size="lg" color="teal" />
+            )}
+            <p>{step.step_title}</p>
           </div>
         ))}
       </div>

@@ -1,5 +1,6 @@
 "use client";
-import { Button, Link } from "@nextui-org/react";
+
+import { Button, Image } from "@nextui-org/react";
 import { signOut, useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -27,20 +28,20 @@ export default function Home() {
     } else router.push("quest/first-quest");
   }
   return (
-    <>
+    <main className="relative h-full">
       {showPopup && (
         <div className="rounder-md absolute right-5 top-20 flex animate-bounce flex-col items-center justify-center px-3 py-2">
           <FontAwesomeIcon icon={faArrowUp} />
           <p>log in first</p>
         </div>
       )}
-      <main className="flex min-h-full flex-col items-center">
-        <div className="flex flex-col items-center justify-center gap-12 border border-black  px-4 py-16">
-          <Button onClick={handleClick} color="primary">
-            Start your first quest
-          </Button>
-        </div>
-      </main>
-    </>
+
+      <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 transform bg-[url('/bg-main.png')] bg-contain bg-no-repeat"></div>
+      <div className="flex h-full w-full flex-col items-center justify-center ">
+        <Button onClick={handleClick} color="primary" className="start-first">
+          Start your first quest
+        </Button>
+      </div>
+    </main>
   );
 }

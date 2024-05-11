@@ -26,7 +26,11 @@ export default function SignOutButton() {
     if (wallet) void tonConnectUI.disconnect();
   };
   return (
-    <Button fullWidth onClick={handleSignOut} color="danger">
+    <Button
+      fullWidth
+      onClick={handleSignOut}
+      className="bg-giantsOrange text-[#F0FFF0]"
+    >
       SIGN OUT
     </Button>
   );

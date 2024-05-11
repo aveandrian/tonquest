@@ -29,11 +29,9 @@ export function QuestStepComponent({
   }
 
   return (
-    <div className="border-1-black col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-2 border-double border-indigo-200 p-5">
+    <div className="border-blue col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double p-5">
       <div className="flex h-full flex-col items-center justify-center gap-5">
-        <h1 className="mt-5 text-center text-3xl font-bold">
-          {stepInfo.step_title}
-        </h1>
+        <h1 className="mt-5 text-center text-3xl ">{stepInfo.step_title}</h1>
         <p className="w-3/4 text-center text-lg">{stepInfo.step_description}</p>
         {!session && (
           <p className="underline underline-offset-4">
@@ -55,14 +53,22 @@ export function QuestStepComponent({
           </Button>
         )}
         {session && isTwitterQuest && !session?.user.twitter && (
-          <Button href="/profile" as={Link} variant="solid" fullWidth={true}>
+          <Button
+            href="/profile"
+            as={Link}
+            variant="solid" //
+            className="w-fit bg-gradient-to-l from-cyan-500 to-blue-500 px-5"
+          >
             Connect Twitter First
           </Button>
         )}
       </div>
       <div className="mt-auto flex w-full flex-row">
         {stepInfo.step_order > 0 && (
-          <Button onClick={() => handleStepChange(-1)} color="secondary">
+          <Button
+            onClick={() => handleStepChange(-1)}
+            className="bg-secondary text-[#F0FFF0]"
+          >
             Back
           </Button>
         )}

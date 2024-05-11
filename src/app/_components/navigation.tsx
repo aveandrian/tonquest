@@ -9,12 +9,13 @@ import {
   NavbarContent,
   NavbarItem,
   Link,
+  Spinner,
 } from "@nextui-org/react";
 
 import TonQuestLogo from "@/app/_components/ton-quest-logo";
 
 export default function Navigation() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   return (
     <Navbar position="static">
@@ -26,6 +27,7 @@ export default function Navigation() {
       </NavbarBrand>
       <NavbarContent justify="end">
         <NavbarItem className="lg:flex">
+          {status === "loading" && <Spinner />}
           {!session && <SingInButtonTON />}
           {!!session && <NavbarProfile />}
         </NavbarItem>
