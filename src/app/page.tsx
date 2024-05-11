@@ -28,15 +28,15 @@ export default function Home() {
     } else router.push("quest/first-quest");
   }
   return (
-    <main className="relative h-full">
+    <main className="relative h-full w-full max-w-[1024px] self-center px-6">
       {showPopup && (
-        <div className="rounder-md absolute right-5 top-20 flex animate-bounce flex-col items-center justify-center px-3 py-2">
+        <div className="rounder-md absolute right-5 top-5 flex animate-bounce flex-col items-center justify-center px-3 py-2">
           <FontAwesomeIcon icon={faArrowUp} />
-          <p>log in first</p>
+          <p className="text-center">log in first</p>
         </div>
       )}
 
-      <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 transform bg-[url('/bg-main.png')] bg-contain bg-no-repeat"></div>
+      <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 transform bg-[url('/bg-main.png')] bg-contain bg-no-repeat sm:h-80 sm:w-80"></div>
       <div className="flex h-full w-full flex-col items-center justify-center ">
         <Button onClick={handleClick} color="primary" className="start-first">
           Start your first quest
