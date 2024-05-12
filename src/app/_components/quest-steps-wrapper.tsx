@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { Skeleton, Spinner } from "@nextui-org/react";
+import { Spinner } from "@nextui-org/react";
 
 export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);

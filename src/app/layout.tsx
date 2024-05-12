@@ -11,6 +11,7 @@ import { ContextSessionProviders } from "@/ContextSessionProviders";
 import { TonBackendAuthProvider } from "./TonBackendAuth";
 import Navigation from "./_components/navigation";
 import { NextUIProvider } from "@nextui-org/react";
+import NextTopLoader from "nextjs-toploader";
 
 import { Toaster } from "sonner";
 
@@ -48,6 +49,7 @@ export default async function RootLayout({
             <ContextSessionProviders serverSession={serverSession}>
               <TonBackendAuthProvider>
                 <NextUIProvider>
+                  <NextTopLoader showSpinner={false} color={"#F85525"} />
                   <Toaster position="top-right" richColors />
                   <Navigation />
                   {children}
