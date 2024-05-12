@@ -7,15 +7,13 @@ import { redirect } from "next/navigation";
 import SingInButtonTON from "../_components/sign-in-button-ton";
 import SignOutButton from "../_components/sign-out-button";
 import { useSession } from "next-auth/react";
-import { useTonAddress } from "@tonconnect/ui-react";
-import { Spinner } from "@nextui-org/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
+import { toUserFriendlyAddress } from "@tonconnect/sdk";
 
 export default function Profile() {
   const { data: session } = useSession();
-  const userFriendlyAddress = useTonAddress();
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
 
@@ -39,13 +37,7 @@ export default function Profile() {
           <p className="text-xl	 font-semibold">TON Wallet:</p>
           <div className="flex flex-row items-center gap-2 sm:flex-col">
             {session.user.tonAddress ? (
-              <>
-                {userFriendlyAddress ? (
-                  <p>{userFriendlyAddress}</p>
-                ) : (
-                  <Spinner />
-                )}
-              </>
+              <p>{toUserFriendlyAddress(session.user.tonAddress)}</p>
             ) : (
               <SingInButtonTON />
             )}

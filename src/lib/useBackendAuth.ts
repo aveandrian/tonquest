@@ -13,7 +13,7 @@ export function useBackendAuth() {
   const isConnectionRestored = useIsConnectionRestored();
   const wallet = useTonWallet();
   const [tonConnectUI] = useTonConnectUI();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     if (!isConnectionRestored) {
@@ -39,8 +39,8 @@ export function useBackendAuth() {
       return;
     }
 
-    if (session) {
-      console.log("set token!");
+    if (session && status === "authenticated") {
+      console.log("user logged in");
       // setToken(token);
       return;
     }
@@ -49,13 +49,9 @@ export function useBackendAuth() {
       wallet.connectItems?.tonProof &&
       !("error" in wallet.connectItems.tonProof)
     ) {
-      console.log("CHECK PROOF");
-
       void signIn("ton", {
         walletInfo: JSON.stringify(wallet),
       });
-
-      localStorage.setItem(localStorageKey, "verified");
     } else {
       void tonConnectUI.disconnect();
     }
