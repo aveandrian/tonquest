@@ -15,7 +15,15 @@ export default function NavbarProfile() {
       <DropdownTrigger>
         <Button color="primary">MENU</Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Static Actions">
+      <DropdownMenu
+        aria-label="Static Actions"
+        itemClasses={{
+          base: [
+            "data-[hover=true]:bg-[#FAA968]",
+            "data-[hover=true]:bg-opacity-50",
+          ],
+        }}
+      >
         <DropdownItem key="profile">
           <Button
             href="/profile"
