@@ -79,7 +79,7 @@ export function QuestStepComponent({
           color="primary"
           isLoading={isButtonLoading}
         >
-          Next
+          {isLastStep ? "Finish" : "Next"}
         </Button>
       </div>
     </div>
