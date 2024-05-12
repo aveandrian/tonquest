@@ -82,7 +82,6 @@ export const authOptions: NextAuthOptions = {
 
       if (isSignIn) {
         let twitterHandle, discordHandle;
-        console.log("profile", profile);
         account?.provider === "discord"
           ? (discordHandle = profile?.username)
           : (discordHandle = user.discordHandle);

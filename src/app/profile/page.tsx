@@ -19,7 +19,6 @@ export default function Profile() {
 
   useEffect(() => {
     if (error === "OAuthAccountNotLinked") {
-      console.log('LET"S CREATE TOAT');
       toast.dismiss("accountNotLinked");
       toast.error("Account already linked to another user.", {
         id: "accountNotLinked",
