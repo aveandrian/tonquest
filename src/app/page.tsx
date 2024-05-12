@@ -1,23 +1,15 @@
 "use client";
 
-import { Button, Image } from "@nextui-org/react";
-import { signOut, useSession } from "next-auth/react";
-import { redirect, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Button } from "@nextui-org/react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 
 export default function Home() {
   const router = useRouter();
-  const { data: session, update } = useSession();
-
-  // useEffect(() => {
-  //   async function updateCurrentSession() {
-  //     await signOut();
-  //     // await update();
-  //   }
-  //   if (session) void updateCurrentSession();
-  // }, [session]);
+  const { data: session } = useSession();
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
 
@@ -40,9 +32,6 @@ export default function Home() {
       <Button onClick={handleClick} color="primary" className="start-first">
         Start your first quest
       </Button>
-      {/* <div className="flex h-full w-full flex-col items-center justify-center ">
-        
-      </div> */}
     </main>
   );
 }

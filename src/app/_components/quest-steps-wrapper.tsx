@@ -5,7 +5,7 @@ import { QuestStepComponent } from "./quest-step";
 import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
@@ -16,7 +16,7 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
     currentStepIndex === stepsInfo.length - 1,
   );
 
-  const { data: userQuestProgress, isLoading: isUserQuestProgressLoading } =
+  const { data: userQuestProgress } =
     api.questProgress.getUserQuestProgress.useQuery({
       questId: currentStepInfo?.quest_id ?? -1,
     });
