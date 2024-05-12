@@ -11,12 +11,13 @@ import { ContextSessionProviders } from "@/ContextSessionProviders";
 import { TonBackendAuthProvider } from "./TonBackendAuth";
 import Navigation from "./_components/navigation";
 import { NextUIProvider } from "@nextui-org/react";
-import NextTopLoader from "nextjs-toploader";
+// import NextTopLoader from "nextjs-toploader";
 
 import { Toaster } from "sonner";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 
 config.autoAddCss = false;
 
@@ -49,7 +50,7 @@ export default async function RootLayout({
             <ContextSessionProviders serverSession={serverSession}>
               <TonBackendAuthProvider>
                 <NextUIProvider>
-                  <NextTopLoader showSpinner={false} color={"#F85525"} />
+                  {/* <NextTopLoader showSpinner={false} color={"#F85525"} /> */}
                   <Toaster position="top-right" richColors />
                   <Navigation />
                   {children}

@@ -5,7 +5,7 @@ import { useAccount, useChainId, useConnect, useSignMessage } from "wagmi";
 import { injected } from "wagmi/connectors";
 import { useEffect } from "react";
 import { Button } from "@nextui-org/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next-nprogress-bar";
 
 export default function SingInButtonEVM() {
   const { signMessageAsync } = useSignMessage();
