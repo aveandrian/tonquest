@@ -38,7 +38,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`font-sans ${inter.variable} min-h-screen bg-background text-foreground light`}
+        className={`min-h-screen font-sans ${inter.variable}  bg-background text-foreground light`}
         suppressHydrationWarning={true}
       >
         <Providers>
