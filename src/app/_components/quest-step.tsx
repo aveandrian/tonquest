@@ -10,18 +10,20 @@ export function QuestStepComponent({
   handleStepChange,
   isLastStep,
   isButtonLoading,
+  isStepCompleted,
 }: {
   stepInfo: QuestStep;
   handleStepChange: (x: number) => void;
   isLastStep: boolean;
   isButtonLoading: boolean;
+  isStepCompleted: boolean;
 }) {
   const { data: session } = useSession();
   const isTwitterQuest = stepInfo.step_type === 1;
   const [isFollowClicked, setIsFollowClicked] = useState<boolean>(true);
 
   useEffect(() => {
-    if (stepInfo.step_type === 1) setIsFollowClicked(false);
+    if (stepInfo.step_type === 1 && !isStepCompleted) setIsFollowClicked(false);
   }, [stepInfo.step_type]);
 
   function handleFollowClick() {
@@ -74,7 +76,10 @@ export function QuestStepComponent({
         )}
         <Button
           onClick={() => handleStepChange(1)}
-          isDisabled={isLastStep || (isTwitterQuest && !isFollowClicked)}
+          isDisabled={
+            isLastStep ||
+            (!isStepCompleted && isTwitterQuest && !isFollowClicked)
+          }
           className="ml-auto"
           color="primary"
           isLoading={isButtonLoading}

@@ -48,6 +48,13 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
 
   async function handleStepChange(amount: number) {
     if (amount > 0 && currentStepInfo) {
+      if (
+        userQuestProgress &&
+        currentStepInfo.step_order < userQuestProgress?.current_step_id
+      ) {
+        setCurrentStepIndex((prev) => prev + 1);
+        return;
+      }
       sendStepCompleted.mutate({
         questId: currentStepInfo?.quest_id,
         completedStepId: currentStepInfo?.step_id,
@@ -60,16 +67,27 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
 
   return (
     <div className="grid h-full	w-full grid-cols-3 gap-x-5 sm:flex">
+      {userQuestProgress &&
+        void console.log(
+          "userQuestProgress?.current_step_id",
+          userQuestProgress?.current_step_id,
+        )}
       <div
         className={`col-span-1 ${!isLoadingUserProgress ? "mt-auto" : "justify-center"} flex flex-col gap-1 sm:hidden`}
       >
         {isLoadingUserProgress && <Spinner className="justify-center" />}
         {!isLoadingUserProgress &&
+          userQuestProgress &&
           stepsInfo.map((step, i) => (
             <div
               key={step.step_id}
               className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo?.step_order === i ? "bg-sandyBrown border-sandyBrown" : "bg-peachYellow border-peachYellow"}`}
             >
+              {
+                void console.log(
+                  `stepID: ${i} iscompleted :${userQuestProgress && i < userQuestProgress?.current_step_id}`,
+                )
+              }
               {userQuestProgress && i < userQuestProgress?.current_step_id && (
                 <FontAwesomeIcon icon={faCheckCircle} size="lg" color="teal" />
               )}
@@ -88,6 +106,10 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
           stepInfo={currentStepInfo}
           handleStepChange={handleStepChange}
           isButtonLoading={sendStepCompleted.isPending}
+          isStepCompleted={Boolean(
+            userQuestProgress &&
+              currentStepInfo.step_order < userQuestProgress?.current_step_id,
+          )}
         />
       )}
     </div>
