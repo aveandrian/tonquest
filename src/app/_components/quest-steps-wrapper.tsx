@@ -16,7 +16,7 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
     currentStepIndex === stepsInfo.length - 1,
   );
 
-  const { data: userQuestProgress } =
+  const { data: userQuestProgress, refetch: refetchUserProgress } =
     api.questProgress.getUserQuestProgress.useQuery({
       questId: currentStepInfo?.quest_id ?? -1,
     });
@@ -24,6 +24,7 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
   const sendStepCompleted = api.questProgress.updateUserProgress.useMutation({
     onSuccess: () => {
       setCurrentStepIndex((prev) => prev + 1);
+      refetchUserProgress();
     },
   });
 
