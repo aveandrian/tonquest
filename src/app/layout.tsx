@@ -12,7 +12,7 @@ import { TonBackendAuthProvider } from "./TonBackendAuth";
 import Navigation from "./_components/navigation";
 import { NextUIProvider } from "@nextui-org/react";
 
-import { Toaster, toast } from "sonner";
+import { Toaster } from "sonner";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";

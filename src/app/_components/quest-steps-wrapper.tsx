@@ -24,7 +24,7 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
   const sendStepCompleted = api.questProgress.updateUserProgress.useMutation({
     onSuccess: () => {
       setCurrentStepIndex((prev) => prev + 1);
-      refetchUserProgress();
+      void refetchUserProgress();
     },
   });
 
