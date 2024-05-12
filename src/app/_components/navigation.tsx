@@ -28,7 +28,7 @@ export default function Navigation() {
       <NavbarContent justify="end">
         <NavbarItem className="lg:flex">
           {status === "loading" && <Spinner />}
-          {!session && <SingInButtonTON />}
+          {!session && status !== "loading" && <SingInButtonTON />}
           {!!session && <NavbarProfile />}
         </NavbarItem>
       </NavbarContent>

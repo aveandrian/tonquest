@@ -118,7 +118,7 @@ export const authOptions: NextAuthOptions = {
 
       return Promise.resolve(token);
     },
-    session: ({ session, token }) => {
+    session: async ({ session, token }) => {
       return {
         ...session,
         user: {

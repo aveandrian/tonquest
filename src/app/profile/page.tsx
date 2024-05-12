@@ -16,12 +16,12 @@ export default function Profile() {
 
   if (!session) redirect("/");
   return (
-    <main className="flex min-h-[90vh] w-full flex-col items-center border-2 border-solid px-6">
+    <main className="flex min-h-[90vh] w-full flex-col items-center px-6">
       <div className="mt-5 flex h-full w-full max-w-[1024px] flex-col items-center gap-5">
         <h1 className="text-center text-4xl">Profile page</h1>
-        <div className="flex w-full flex-col  gap-4">
-          <h2 className="text-2xl">TON Wallet:</h2>
-          <div className="flex flex-row items-center gap-2">
+        <div className="flex w-full flex-col gap-4">
+          <p className="text-xl	 font-semibold">TON Wallet:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col">
             {session.user.tonAddress ? (
               <>
                 {userFriendlyAddress ? (
@@ -36,8 +36,8 @@ export default function Profile() {
           </div>
         </div>
         <div className="flex w-full flex-col gap-4">
-          <h2 className="text-2xl">Discord:</h2>
-          <div className="flex flex-row items-center gap-2">
+          <p className="text-xl	 font-semibold">Discord:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start">
             {session.user.discord ? (
               <>
                 <p>{session.user.discord}</p>
@@ -49,8 +49,8 @@ export default function Profile() {
           </div>
         </div>
         <div className="flex w-full flex-col  gap-4">
-          <h2 className="text-2xl">Twitter:</h2>
-          <div className="flex flex-row items-center gap-2">
+          <p className="text-xl	 font-semibold">Twitter:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start">
             {session.user.twitter ? (
               <>
                 <p>{session.user.twitter}</p>
@@ -62,8 +62,8 @@ export default function Profile() {
           </div>
         </div>
         <div className="flex w-full flex-col  gap-4">
-          <h2 className="text-2xl">EVM Wallet:</h2>
-          <div className="flex flex-row items-center gap-2">
+          <p className="text-xl	 font-semibold">EVM Wallet:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start">
             {session.user.address ? (
               <>
                 <p>{session.user.address}</p>
