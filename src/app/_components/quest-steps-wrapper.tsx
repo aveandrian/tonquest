@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { Skeleton, Spinner } from "@nextui-org/react";
 
 export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
@@ -16,10 +17,13 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
     currentStepIndex === stepsInfo.length - 1,
   );
 
-  const { data: userQuestProgress, refetch: refetchUserProgress } =
-    api.questProgress.getUserQuestProgress.useQuery({
-      questId: currentStepInfo?.quest_id ?? -1,
-    });
+  const {
+    data: userQuestProgress,
+    refetch: refetchUserProgress,
+    isLoading: isLoadingUserProgress,
+  } = api.questProgress.getUserQuestProgress.useQuery({
+    questId: currentStepInfo?.quest_id ?? -1,
+  });
 
   const sendStepCompleted = api.questProgress.updateUserProgress.useMutation({
     onSuccess: () => {
@@ -56,25 +60,36 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
 
   return (
     <div className="grid h-full	w-full grid-cols-3 gap-x-5 sm:flex">
-      <div className="col-span-1 mt-auto flex flex-col gap-1 sm:hidden">
-        {stepsInfo.map((step, i) => (
-          <div
-            key={step.step_id}
-            className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo.step_order === i ? "bg-sandyBrown border-sandyBrown" : "bg-peachYellow border-peachYellow"}`}
-          >
-            {userQuestProgress && i < userQuestProgress?.current_step_id && (
-              <FontAwesomeIcon icon={faCheckCircle} size="lg" color="teal" />
-            )}
-            <p>{step.step_title}</p>
-          </div>
-        ))}
+      <div
+        className={`col-span-1 ${!isLoadingUserProgress ? "mt-auto" : "justify-center"} flex flex-col gap-1 sm:hidden`}
+      >
+        {isLoadingUserProgress && <Spinner className="justify-center" />}
+        {!isLoadingUserProgress &&
+          stepsInfo.map((step, i) => (
+            <div
+              key={step.step_id}
+              className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo?.step_order === i ? "bg-sandyBrown border-sandyBrown" : "bg-peachYellow border-peachYellow"}`}
+            >
+              {userQuestProgress && i < userQuestProgress?.current_step_id && (
+                <FontAwesomeIcon icon={faCheckCircle} size="lg" color="teal" />
+              )}
+              <p>{step.step_title}</p>
+            </div>
+          ))}
       </div>
-      <QuestStepComponent
-        isLastStep={isLastStep}
-        stepInfo={currentStepInfo}
-        handleStepChange={handleStepChange}
-        isButtonLoading={sendStepCompleted.isPending}
-      />
+      {isLoadingUserProgress ? (
+        <div className=" border-blue col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double p-5">
+          {" "}
+          <Spinner></Spinner>
+        </div>
+      ) : (
+        <QuestStepComponent
+          isLastStep={isLastStep}
+          stepInfo={currentStepInfo}
+          handleStepChange={handleStepChange}
+          isButtonLoading={sendStepCompleted.isPending}
+        />
+      )}
     </div>
   );
 }
