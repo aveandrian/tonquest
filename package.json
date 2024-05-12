@@ -46,6 +46,7 @@
     "react-dom": "18.2.0",
     "server-only": "^0.0.1",
     "siwe": "^2.3.2",
+    "sonner": "^1.4.41",
     "superjson": "^2.2.1",
     "ton": "^13.9.0",
     "tonapi-sdk-js": "^1.0.9",

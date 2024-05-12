@@ -9,15 +9,31 @@ import SignOutButton from "../_components/sign-out-button";
 import { useSession } from "next-auth/react";
 import { useTonAddress } from "@tonconnect/ui-react";
 import { Spinner } from "@nextui-org/react";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { toast } from "sonner";
 
 export default function Profile() {
   const { data: session } = useSession();
   const userFriendlyAddress = useTonAddress();
+  const searchParams = useSearchParams();
+  const error = searchParams.get("error");
+
+  useEffect(() => {
+    if (error === "OAuthAccountNotLinked") {
+      console.log('LET"S CREATE TOAT');
+      toast.dismiss("accountNotLinked");
+      toast.error("Account already linked to another user.", {
+        id: "accountNotLinked",
+        duration: 2000,
+      });
+    }
+  }, [error]);
 
   if (!session) redirect("/");
   return (
     <main className="flex min-h-[90vh] w-full flex-col items-center px-6">
-      <div className="mt-5 flex h-full w-full max-w-[1024px] flex-col items-center gap-5">
+      <div className="mt-5 flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
         <h1 className="text-center text-4xl">Profile page</h1>
         <div className="flex w-full flex-col gap-4">
           <p className="text-xl	 font-semibold">TON Wallet:</p>
