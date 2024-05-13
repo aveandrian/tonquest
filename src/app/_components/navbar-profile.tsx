@@ -36,7 +36,7 @@ export default function NavbarProfile() {
             Profile
           </Button>
         </DropdownItem>
-        <DropdownItem key="signout">
+        <DropdownItem key="signout" className="sm:hidden">
           <SignOutButton />
         </DropdownItem>
       </DropdownMenu>
