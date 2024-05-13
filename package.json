@@ -33,6 +33,7 @@
     "@trpc/client": "next",
     "@trpc/react-query": "next",
     "@trpc/server": "next",
+    "@twa-dev/sdk": "^7.0.0",
     "axios": "^1.6.8",
     "encoding": "^0.1.13",
     "ethers": "^6.12.1",
