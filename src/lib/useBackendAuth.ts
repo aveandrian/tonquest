@@ -55,7 +55,5 @@ export function useBackendAuth() {
     } else {
       void tonConnectUI.disconnect();
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wallet, isConnectionRestored]);
+  }, [wallet, isConnectionRestored, session, status, tonConnectUI]);
 }

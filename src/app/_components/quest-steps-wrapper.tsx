@@ -72,11 +72,11 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
       >
         {isLoadingUserProgress && <Spinner className="justify-center" />}
         {!isLoadingUserProgress &&
-          userQuestProgress &&
+          userQuestProgress !== undefined &&
           stepsInfo.map((step, i) => (
             <div
               key={step.step_id}
-              className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo?.step_order === i ? "bg-sandyBrown border-sandyBrown" : "bg-peachYellow border-peachYellow"}`}
+              className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo?.step_order === i ? "border-sandyBrown bg-sandyBrown" : "border-peachYellow bg-peachYellow"}`}
             >
               {userQuestProgress && i < userQuestProgress?.current_step_id && (
                 <FontAwesomeIcon icon={faCheckCircle} size="lg" color="teal" />
@@ -86,7 +86,7 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
           ))}
       </div>
       {isLoadingUserProgress ? (
-        <div className=" border-blue col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double p-5">
+        <div className=" col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5">
           {" "}
           <Spinner></Spinner>
         </div>

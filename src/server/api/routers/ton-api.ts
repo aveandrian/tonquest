@@ -59,4 +59,9 @@ export const tonApiRouter = createTRPCRouter({
 
       return verifyRes;
     }),
+  checkIsWalletActive: publicProcedure
+    .input(z.object({ publicKey: z.string() }))
+    .query(({ input }) => {
+      return client.wallet.getWalletsByPublicKey(input.publicKey);
+    }),
 });
