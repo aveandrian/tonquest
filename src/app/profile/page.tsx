@@ -29,12 +29,12 @@ export default function Profile() {
 
   if (!session) redirect("/");
   return (
-    <main className="flex min-h-[90vh] w-full flex-col items-center px-6">
-      <div className="mt-5 flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
+    <main className=" flex min-h-[90vh] w-full flex-col items-center px-6">
+      <div className="my-auto flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
         <h1 className="text-center text-4xl">Profile page</h1>
         <div className="flex w-full flex-col gap-4">
-          <p className="text-xl	 font-semibold">TON Wallet:</p>
-          <div className="flex flex-row items-center gap-2 sm:flex-col">
+          <p className="text-xl	 font-semibold sm:text-base">TON Wallet:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:text-sm">
             {session.user.tonAddress ? (
               <p>{toUserFriendlyAddress(session.user.tonAddress)}</p>
             ) : (
@@ -43,8 +43,8 @@ export default function Profile() {
           </div>
         </div>
         <div className="flex w-full flex-col gap-4">
-          <p className="text-xl	 font-semibold">Discord:</p>
-          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start">
+          <p className="text-xl	 font-semibold  sm:text-base">Discord:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start sm:text-sm">
             {session.user.discord ? (
               <>
                 <p>{session.user.discord}</p>
@@ -56,8 +56,8 @@ export default function Profile() {
           </div>
         </div>
         <div className="flex w-full flex-col  gap-4">
-          <p className="text-xl	 font-semibold">Twitter:</p>
-          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start">
+          <p className="text-xl	 font-semibold  sm:text-base">Twitter:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start sm:text-sm">
             {session.user.twitter ? (
               <>
                 <p>{session.user.twitter}</p>
@@ -69,8 +69,8 @@ export default function Profile() {
           </div>
         </div>
         <div className="flex w-full flex-col  gap-4">
-          <p className="text-xl	 font-semibold">EVM Wallet:</p>
-          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start">
+          <p className="text-xl	 font-semibold  sm:text-base">EVM Wallet:</p>
+          <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start sm:text-sm">
             {session.user.address ? (
               <>
                 <p>{session.user.address}</p>

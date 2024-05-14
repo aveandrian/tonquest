@@ -31,10 +31,14 @@ export function QuestStepComponent({
   }
 
   return (
-    <div className="border-blue col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double p-5">
-      <div className="flex h-full flex-col items-center justify-center gap-5">
-        <h1 className="mt-5 text-center text-3xl ">{stepInfo.step_title}</h1>
-        <p className="w-3/4 text-center text-lg">{stepInfo.step_description}</p>
+    <div className="col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5 sm:p-2">
+      <div className="mt-auto flex h-full flex-col items-center justify-center gap-5">
+        <h1 className="mt-5 text-center text-3xl sm:w-full sm:text-xl ">
+          {stepInfo.step_title}
+        </h1>
+        <p className="w-3/4 text-center text-lg sm:w-full sm:text-sm">
+          {stepInfo.step_description}
+        </p>
         {!session && (
           <p className="underline underline-offset-4">
             You need to log in first
@@ -59,7 +63,7 @@ export function QuestStepComponent({
             href="/profile"
             as={Link}
             variant="solid" //
-            className="w-fit bg-gradient-to-l from-cyan-500 to-blue-500 px-5"
+            className="to-blue-500 w-fit bg-gradient-to-l from-cyan-500 px-5"
           >
             Connect Twitter First
           </Button>

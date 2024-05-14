@@ -40,7 +40,7 @@ export default function RemoveAccountButton({
   return (
     <>
       <Button
-        className="ml-auto"
+        className="ml-auto sm:text-xs"
         color="danger"
         onClick={() =>
           removeAccount.mutate({
