@@ -7,8 +7,6 @@ import {
 } from "@tonconnect/ui-react";
 import { signIn, useSession } from "next-auth/react";
 
-const localStorageKey = "my-dapp-auth-token";
-
 export function useBackendAuth() {
   const isConnectionRestored = useIsConnectionRestored();
   const wallet = useTonWallet();

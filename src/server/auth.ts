@@ -306,6 +306,11 @@ export const authOptions: NextAuthOptions = {
 
           const proof = walletInfo?.connectItems?.tonProof;
 
+          if (walletInfo.account.publicKey)
+            await client.wallet.getWalletsByPublicKey(
+              walletInfo.account.publicKey,
+            );
+
           const { public_key } = await client.accounts.getAccountPublicKey(
             walletInfo.account.address,
           );
@@ -377,6 +382,7 @@ export const authOptions: NextAuthOptions = {
   ],
   pages: {
     signIn: "/profile",
+    error: "/",
   },
 };
 
