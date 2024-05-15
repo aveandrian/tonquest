@@ -3,7 +3,7 @@
 import { Button, Link } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 
-export function QuestStepTwitter({
+export function QuestStepDiscord({
   isFollowClicked,
   handleFollowClick,
 }: {
@@ -13,9 +13,9 @@ export function QuestStepTwitter({
   const { data: session } = useSession();
   return (
     <>
-      {session?.user.twitter && (
+      {session?.user.discord && (
         <Button
-          href="https://twitter.com/aveandrian"
+          href="https://discord.gg/cdVjsFw4eh"
           as={Link}
           variant="solid"
           className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"}`}
@@ -24,17 +24,17 @@ export function QuestStepTwitter({
           showAnchorIcon
           onClick={handleFollowClick}
         >
-          Follow Twitter
+          Join Discord
         </Button>
       )}
-      {!session?.user.twitter && (
+      {!session?.user.discord && (
         <Button
           href="/profile"
           as={Link}
-          variant="solid" //
+          variant="solid"
           className="to-blue-500 w-fit bg-gradient-to-l from-cyan-500 px-5"
         >
-          Connect Twitter First
+          Connect Discord First
         </Button>
       )}
     </>

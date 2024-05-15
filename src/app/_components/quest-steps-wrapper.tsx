@@ -1,14 +1,21 @@
 "use client";
 
-import { type QuestStep } from "@prisma/client";
+import { type Quest, type QuestStep } from "@prisma/client";
 import { QuestStepComponent } from "./quest-step";
 import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { Spinner } from "@nextui-org/react";
+import { CheckmarkAnimation } from "./checkmark-animation";
 
-export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
+export function QuestStepsWrapper({
+  stepsInfo,
+  questInfo,
+}: {
+  stepsInfo: QuestStep[];
+  questInfo: Quest;
+}) {
   const [currentStepIndex, setCurrentStepIndex] = useState<number>(0);
   const [currentStepInfo, setCurrentStepInfo] = useState<QuestStep | undefined>(
     stepsInfo[currentStepIndex],
@@ -22,7 +29,7 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
     refetch: refetchUserProgress,
     isLoading: isLoadingUserProgress,
   } = api.questProgress.getUserQuestProgress.useQuery({
-    questId: currentStepInfo?.quest_id ?? -1,
+    questId: questInfo.quest_id,
   });
 
   const sendStepCompleted = api.questProgress.updateUserProgress.useMutation({
@@ -56,14 +63,14 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
         return;
       }
       sendStepCompleted.mutate({
-        questId: currentStepInfo?.quest_id,
+        questId: questInfo.quest_id,
         completedStepId: currentStepInfo?.step_id,
         isLastStep: isLastStep,
       });
     } else setCurrentStepIndex((prev) => prev + amount);
   }
 
-  if (!currentStepInfo) return null;
+  if (!currentStepInfo && !userQuestProgress?.completed) return null;
 
   return (
     <div className="grid h-full	w-full grid-cols-3 gap-x-5 sm:flex">
@@ -90,17 +97,25 @@ export function QuestStepsWrapper({ stepsInfo }: { stepsInfo: QuestStep[] }) {
           {" "}
           <Spinner></Spinner>
         </div>
+      ) : !!userQuestProgress?.completed ? (
+        <div className=" col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-1 rounded-lg border-5 border-double border-blue p-5">
+          <CheckmarkAnimation />
+          <h1 className="text-2xl">You&apos;ve done it!</h1>
+        </div>
       ) : (
-        <QuestStepComponent
-          isLastStep={isLastStep}
-          stepInfo={currentStepInfo}
-          handleStepChange={handleStepChange}
-          isButtonLoading={sendStepCompleted.isPending}
-          isStepCompleted={Boolean(
-            userQuestProgress &&
-              currentStepInfo.step_order < userQuestProgress?.current_step_id,
-          )}
-        />
+        !userQuestProgress?.completed &&
+        currentStepInfo && (
+          <QuestStepComponent
+            isLastStep={isLastStep}
+            stepInfo={currentStepInfo}
+            handleStepChange={handleStepChange}
+            isButtonLoading={sendStepCompleted.isPending}
+            isStepCompleted={Boolean(
+              userQuestProgress &&
+                currentStepInfo.step_order < userQuestProgress?.current_step_id,
+            )}
+          />
+        )
       )}
     </div>
   );

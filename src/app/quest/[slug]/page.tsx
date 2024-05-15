@@ -32,7 +32,9 @@ export default async function QuestWrapper({
         <p className="text-center text-lg sm:w-full sm:text-base">
           {questInfo.quest_description}
         </p>
-        {stepsInfo && <QuestStepsWrapper stepsInfo={stepsInfo} />}
+        {stepsInfo && (
+          <QuestStepsWrapper stepsInfo={stepsInfo} questInfo={questInfo} />
+        )}
       </div>
     </main>
   );

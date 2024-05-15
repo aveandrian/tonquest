@@ -1,9 +1,11 @@
 "use client";
 
-import { Button, Link } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import { type QuestStep } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
+import { QuestStepTwitter } from "./quest-step-twitter";
+import { QuestStepDiscord } from "./quest-step-discord";
 
 export function QuestStepComponent({
   stepInfo,
@@ -20,11 +22,17 @@ export function QuestStepComponent({
 }) {
   const { data: session } = useSession();
   const isTwitterQuest = stepInfo.step_type === 1;
+  const isDiscordQuest = stepInfo.step_type === 2;
+
   const [isFollowClicked, setIsFollowClicked] = useState<boolean>(true);
 
   useEffect(() => {
-    if (stepInfo.step_type === 1 && !isStepCompleted) setIsFollowClicked(false);
-  }, [stepInfo.step_type]);
+    if (
+      (stepInfo.step_type === 1 && !isStepCompleted) ||
+      (stepInfo.step_type === 2 && !isStepCompleted)
+    )
+      setIsFollowClicked(false);
+  }, [isStepCompleted, stepInfo.step_type]);
 
   function handleFollowClick() {
     setIsFollowClicked(true);
@@ -44,29 +52,17 @@ export function QuestStepComponent({
             You need to log in first
           </p>
         )}
-        {session && isTwitterQuest && session?.user.twitter && (
-          <Button
-            href="https://twitter.com/aveandrian"
-            as={Link}
-            variant="solid"
-            className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"}`}
-            fullWidth={true}
-            isExternal
-            showAnchorIcon
-            onClick={handleFollowClick}
-          >
-            Follow Twitter
-          </Button>
+        {isTwitterQuest && (
+          <QuestStepTwitter
+            handleFollowClick={handleFollowClick}
+            isFollowClicked={isFollowClicked}
+          />
         )}
-        {session && isTwitterQuest && !session?.user.twitter && (
-          <Button
-            href="/profile"
-            as={Link}
-            variant="solid" //
-            className="to-blue-500 w-fit bg-gradient-to-l from-cyan-500 px-5"
-          >
-            Connect Twitter First
-          </Button>
+        {isDiscordQuest && (
+          <QuestStepDiscord
+            handleFollowClick={handleFollowClick}
+            isFollowClicked={isFollowClicked}
+          />
         )}
       </div>
       <div className="mt-auto flex w-full flex-row">
@@ -81,8 +77,9 @@ export function QuestStepComponent({
         <Button
           onClick={() => handleStepChange(1)}
           isDisabled={
-            isLastStep ||
-            (!isStepCompleted && isTwitterQuest && !isFollowClicked)
+            !isStepCompleted &&
+            (isTwitterQuest || isDiscordQuest) &&
+            !isFollowClicked
           }
           className="ml-auto"
           color="primary"

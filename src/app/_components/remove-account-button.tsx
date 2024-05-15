@@ -42,6 +42,7 @@ export default function RemoveAccountButton({
       <Button
         className="ml-auto sm:text-xs"
         color="danger"
+        isLoading={removeAccount.isPending}
         onClick={() =>
           removeAccount.mutate({
             provider: provider,
