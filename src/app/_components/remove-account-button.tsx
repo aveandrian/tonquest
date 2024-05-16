@@ -40,7 +40,7 @@ export default function RemoveAccountButton({
   return (
     <>
       <Button
-        className="ml-auto sm:text-xs"
+        className="ml-auto font-bold sm:text-xs"
         color="danger"
         isLoading={removeAccount.isPending}
         onClick={() =>

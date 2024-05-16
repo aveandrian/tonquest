@@ -54,7 +54,7 @@ export default function SingInButtonEVM() {
   return (
     <Button
       color="primary"
-      className="text-blue"
+      className="font-bold text-blue"
       onClick={(e: React.MouseEvent<HTMLElement>) => {
         e.preventDefault();
         if (!isConnected) {

@@ -13,7 +13,7 @@ export default function NavbarProfile() {
   return (
     <Dropdown className="bg-background">
       <DropdownTrigger>
-        <Button color="primary" className="text-blue">
+        <Button color="primary" className="font-bold text-blue">
           MENU
         </Button>
       </DropdownTrigger>
@@ -33,7 +33,7 @@ export default function NavbarProfile() {
             color="primary"
             variant="solid"
             fullWidth={true}
-            className="uppercase text-blue"
+            className="font-bold uppercase text-blue"
           >
             Profile
           </Button>

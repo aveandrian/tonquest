@@ -15,7 +15,7 @@ export default function SingInButtonTON() {
     <Button
       onClick={tonConnectModal.open}
       color="primary"
-      className="sm:text-xs"
+      className="font-bold sm:text-xs"
       isLoading={isConnectionRestored && Boolean(wallet)}
     >
       Connect TON wallet

@@ -18,7 +18,7 @@ export function QuestStepDiscord({
           href="https://discord.gg/cdVjsFw4eh"
           as={Link}
           variant="solid"
-          className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"} `}
+          className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"} font-bold`}
           fullWidth={true}
           isExternal
           showAnchorIcon
@@ -32,7 +32,7 @@ export function QuestStepDiscord({
           href="/profile"
           as={Link}
           variant="solid"
-          className="to-blue-500 w-fit bg-gradient-to-l from-cyan-500 px-5"
+          className="to-blue-500 w-fit bg-gradient-to-l from-cyan-500 px-5 font-bold"
         >
           Connect Discord First
         </Button>

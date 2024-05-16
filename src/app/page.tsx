@@ -48,7 +48,7 @@ export default function Home() {
             <Button
               onClick={handleClick}
               color="primary"
-              className="start-first my-auto"
+              className="start-first my-auto font-bold"
               isLoading={completedQuestsByUser?.isLoading}
             >
               Start your first quest

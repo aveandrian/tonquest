@@ -18,7 +18,7 @@ export function QuestStepTwitter({
           href="https://twitter.com/aveandrian"
           as={Link}
           variant="solid"
-          className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"}`}
+          className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"} font-bold`}
           fullWidth={true}
           isExternal
           showAnchorIcon
@@ -32,7 +32,7 @@ export function QuestStepTwitter({
           href="/profile"
           as={Link}
           variant="solid" //
-          className="to-blue-500 w-fit bg-gradient-to-l from-cyan-500 px-5"
+          className="to-blue-500 w-fit bg-gradient-to-l from-cyan-500 px-5 font-bold"
         >
           Connect Twitter First
         </Button>

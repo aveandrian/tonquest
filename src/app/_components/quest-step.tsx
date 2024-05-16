@@ -69,7 +69,7 @@ export function QuestStepComponent({
         {stepInfo.step_order > 0 && (
           <Button
             onClick={() => handleStepChange(-1)}
-            className="bg-secondary text-[#F0FFF0]"
+            className="bg-secondary font-bold text-[#F0FFF0]"
           >
             Back
           </Button>
@@ -81,7 +81,7 @@ export function QuestStepComponent({
             (isTwitterQuest || isDiscordQuest) &&
             !isFollowClicked
           }
-          className="ml-auto"
+          className="ml-auto font-bold"
           color="primary"
           isLoading={isButtonLoading}
         >

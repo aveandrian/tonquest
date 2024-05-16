@@ -8,7 +8,7 @@ export default function SingInButtonTwitter() {
     <Button
       onClick={() => signIn("twitter", { callbackUrl: "/profile" })}
       color="primary"
-      className="text-blue"
+      className="font-bold text-blue"
     >
       Connect Twitter
     </Button>

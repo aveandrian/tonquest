@@ -29,7 +29,7 @@ export default function SignOutButton() {
     <Button
       fullWidth
       onClick={handleSignOut}
-      className="bg-giantsOrange text-[#F0FFF0]"
+      className="bg-giantsOrange font-bold text-[#F0FFF0]"
     >
       SIGN OUT
     </Button>
