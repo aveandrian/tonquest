@@ -84,7 +84,7 @@ export function QuestStepsWrapper({
               key={step.step_id}
               className="relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2"
             >
-              <p className="z-10">{step.step_title}</p>
+              <p className="z-10 font-semibold">{step.step_title}</p>
               {userQuestProgress &&
                 i <= userQuestProgress?.current_step_order && (
                   <FontAwesomeIcon
