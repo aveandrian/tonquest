@@ -41,14 +41,6 @@ export default function Navigation() {
             Explore
           </Link>
         </NavbarItem>
-        <NavbarItem className="hidden">
-          <Link
-            href="/dashboard"
-            className={`link ${pathname === "/dashboard" ? "underline decoration-double	underline-offset-2	" : ""}`}
-          >
-            Dashboard
-          </Link>
-        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="lg:flex">

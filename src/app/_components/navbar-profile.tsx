@@ -26,18 +26,6 @@ export default function NavbarProfile() {
           ],
         }}
       >
-        <DropdownItem key="dashboard" className="hidden">
-          <Button
-            href="/dashboard"
-            as={Link}
-            color="primary"
-            variant="solid"
-            fullWidth={true}
-            className="uppercase text-blue"
-          >
-            Dashboard
-          </Button>
-        </DropdownItem>
         <DropdownItem key="profile">
           <Button
             href="/profile"
