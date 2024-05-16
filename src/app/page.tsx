@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <main className="container relative mt-10 flex h-full min-h-[80vh] w-full max-w-[1024px] flex-col items-center self-center px-6 sm:px-3">
       {showPopup && (
-        <div className="rounder-md absolute right-5 top-5 flex animate-bounce flex-col items-center justify-center px-3 py-2">
+        <div className="rounder-md absolute right-5 top-0 flex animate-bounce flex-col items-center justify-center px-3 py-2">
           <FontAwesomeIcon icon={faArrowUp} />
           <p className="text-center">log in first</p>
         </div>

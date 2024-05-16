@@ -71,9 +71,9 @@ export function QuestStepsWrapper({
   if (!currentStepInfo && !userQuestProgress?.completed) return null;
 
   return (
-    <div className="grid h-full	w-full grid-cols-3 gap-x-5 sm:flex">
+    <div className="grid h-full min-h-[50vh]	w-full grid-cols-3 gap-x-5 sm:flex">
       <div
-        className={`col-span-1 ${!isLoadingUserProgress ? "mt-auto" : "justify-center"} flex flex-col gap-1 sm:hidden`}
+        className={`col-span-1 ${!isLoadingUserProgress ? "mt-auto" : "justify-center"} flex h-fit flex-col gap-1 sm:hidden`}
       >
         {isLoadingUserProgress && <Spinner className="justify-center" />}
         {!isLoadingUserProgress &&
@@ -81,8 +81,9 @@ export function QuestStepsWrapper({
           stepsInfo.map((step, i) => (
             <div
               key={step.step_id}
-              className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo?.step_order === i ? "border-sandyBrown bg-sandyBrown" : "border-peachYellow bg-peachYellow"}`}
+              className={`flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid p-2 ${currentStepInfo?.step_order === i ? "border-sandyBrown bg-sandyBrown" : "border-peachYellow bg-peachYellow"}`}
             >
+              <p>{step.step_title}</p>
               {userQuestProgress &&
                 i <= userQuestProgress?.current_step_order && (
                   <FontAwesomeIcon
@@ -91,7 +92,6 @@ export function QuestStepsWrapper({
                     color="teal"
                   />
                 )}
-              <p>{step.step_title}</p>
             </div>
           ))}
       </div>
