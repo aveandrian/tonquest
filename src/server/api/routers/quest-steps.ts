@@ -47,7 +47,7 @@ export const questStepRouter = createTRPCRouter({
         .array(),
     )
     .mutation(({ ctx, input }) => {
-      const data = input.map((step, i) => ({
+      const data = input.map((step) => ({
         quest_id: step.questId,
         step_type: step.stepType,
         step_title: step.stepTitle,

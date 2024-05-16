@@ -41,7 +41,8 @@ export function QuestStepsWrapper({
 
   useEffect(() => {
     if (userQuestProgress?.current_step_order)
-      setCurrentStepIndex((userQuestProgress.current_step_order as number) + 1);
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+      setCurrentStepIndex(userQuestProgress.current_step_order + 1);
   }, [userQuestProgress]);
 
   useEffect(() => {

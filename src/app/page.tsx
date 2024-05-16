@@ -9,9 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { api } from "@/trpc/react";
 import { QuestCard } from "./_components/quest-card";
-import { Quest } from "@prisma/client";
 import { QuestCardHighlight } from "./_components/quest-card-highlight";
-import { steps } from "framer-motion";
 
 export default function Home() {
   const router = useRouter();
