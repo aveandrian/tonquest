@@ -7,6 +7,7 @@ export const questProgressRouter = createTRPCRouter({
       z.object({
         questId: z.number(),
         completedStepId: z.number(),
+        completedStepOrder: z.number(),
         isLastStep: z.boolean(),
       }),
     )
@@ -17,12 +18,14 @@ export const questProgressRouter = createTRPCRouter({
           userId: ctx.session.user.id,
           quest_id: input.questId,
           current_step_id: input.completedStepId,
+          current_step_order: input.completedStepOrder,
           completed: input.isLastStep,
         },
         update: {
           userId: ctx.session.user.id,
           quest_id: input.questId,
           current_step_id: input.completedStepId,
+          current_step_order: input.completedStepOrder,
           completed: input.isLastStep,
           // ... in case it already exists, update
         },

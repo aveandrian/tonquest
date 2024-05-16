@@ -32,6 +32,7 @@ export default {
         peachYellow: "#F6DCAC",
         sandyBrown: "#FAA968",
         giantsOrange: "#F85525",
+        lightOrange: "#F2BC8C",
       },
       backgroundImage: {
         "hero-pattern": "url('bg-main.png')",

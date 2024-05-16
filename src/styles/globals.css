@@ -103,6 +103,15 @@
   flex-direction: column;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  color: #01204e;
+}
+
 h1 {
   font-family: "K22 TriLine Gothic", sans-serif;
 }

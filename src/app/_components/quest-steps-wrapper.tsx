@@ -40,24 +40,20 @@ export function QuestStepsWrapper({
   });
 
   useEffect(() => {
+    if (userQuestProgress?.current_step_order)
+      setCurrentStepIndex((userQuestProgress.current_step_order as number) + 1);
+  }, [userQuestProgress]);
+
+  useEffect(() => {
     setCurrentStepInfo(stepsInfo[currentStepIndex]);
     setIsLastStep(currentStepIndex === stepsInfo.length - 1);
   }, [currentStepIndex, stepsInfo]);
-
-  useEffect(() => {
-    if (userQuestProgress)
-      setCurrentStepIndex(
-        userQuestProgress?.current_step_id
-          ? userQuestProgress?.current_step_id
-          : 0,
-      );
-  }, [userQuestProgress]);
 
   async function handleStepChange(amount: number) {
     if (amount > 0 && currentStepInfo) {
       if (
         userQuestProgress &&
-        currentStepInfo.step_order < userQuestProgress?.current_step_id
+        currentStepInfo.step_order < userQuestProgress?.current_step_order
       ) {
         setCurrentStepIndex((prev) => prev + 1);
         return;
@@ -65,6 +61,7 @@ export function QuestStepsWrapper({
       sendStepCompleted.mutate({
         questId: questInfo.quest_id,
         completedStepId: currentStepInfo?.step_id,
+        completedStepOrder: currentStepInfo?.step_order,
         isLastStep: isLastStep,
       });
     } else setCurrentStepIndex((prev) => prev + amount);
@@ -85,9 +82,14 @@ export function QuestStepsWrapper({
               key={step.step_id}
               className={`flex grid-cols-1 items-center gap-2 rounded-md border-2 border-solid p-2 ${currentStepInfo?.step_order === i ? "border-sandyBrown bg-sandyBrown" : "border-peachYellow bg-peachYellow"}`}
             >
-              {userQuestProgress && i < userQuestProgress?.current_step_id && (
-                <FontAwesomeIcon icon={faCheckCircle} size="lg" color="teal" />
-              )}
+              {userQuestProgress &&
+                i <= userQuestProgress?.current_step_order && (
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    size="lg"
+                    color="teal"
+                  />
+                )}
               <p>{step.step_title}</p>
             </div>
           ))}

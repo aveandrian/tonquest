@@ -18,7 +18,7 @@ export function QuestStepDiscord({
           href="https://discord.gg/cdVjsFw4eh"
           as={Link}
           variant="solid"
-          className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"}`}
+          className={`${isFollowClicked ? "bg-success-200" : "bg-danger-200"} `}
           fullWidth={true}
           isExternal
           showAnchorIcon

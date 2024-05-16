@@ -8,6 +8,7 @@ export default function SingInButtonDiscord() {
     <Button
       onClick={() => signIn("discord", { callbackUrl: "/profile" })}
       color="primary"
+      className="text-blue"
     >
       Connect Discord
     </Button>

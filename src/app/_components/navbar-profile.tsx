@@ -13,7 +13,9 @@ export default function NavbarProfile() {
   return (
     <Dropdown className="bg-background">
       <DropdownTrigger>
-        <Button color="primary">MENU</Button>
+        <Button color="primary" className="text-blue">
+          MENU
+        </Button>
       </DropdownTrigger>
       <DropdownMenu
         aria-label="Static Actions"
@@ -24,6 +26,18 @@ export default function NavbarProfile() {
           ],
         }}
       >
+        <DropdownItem key="dashboard" className="hidden">
+          <Button
+            href="/dashboard"
+            as={Link}
+            color="primary"
+            variant="solid"
+            fullWidth={true}
+            className="uppercase text-blue"
+          >
+            Dashboard
+          </Button>
+        </DropdownItem>
         <DropdownItem key="profile">
           <Button
             href="/profile"
@@ -31,7 +45,7 @@ export default function NavbarProfile() {
             color="primary"
             variant="solid"
             fullWidth={true}
-            className="uppercase"
+            className="uppercase text-blue"
           >
             Profile
           </Button>

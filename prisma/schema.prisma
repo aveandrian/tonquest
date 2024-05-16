@@ -115,14 +115,15 @@ model QuestStep {
 }
 
 model UserQuestProgress {
-    progress_id     Int       @id @default(autoincrement())
-    userId          String
-    user            User      @relation(fields: [userId], references: [id])
-    quest_id        Int
-    quest           Quest     @relation(fields: [quest_id], references: [quest_id])
-    current_step_id Int
-    step            QuestStep @relation(fields: [current_step_id], references: [step_id])
-    completed       Boolean
+    progress_id        Int       @id @default(autoincrement())
+    userId             String
+    user               User      @relation(fields: [userId], references: [id])
+    quest_id           Int
+    quest              Quest     @relation(fields: [quest_id], references: [quest_id])
+    current_step_id    Int
+    step               QuestStep @relation(fields: [current_step_id], references: [step_id])
+    completed          Boolean
+    current_step_order Int
 
     @@unique([userId, quest_id])
 }

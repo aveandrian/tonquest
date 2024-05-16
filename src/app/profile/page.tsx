@@ -28,15 +28,21 @@ export default function Profile() {
   }, [error]);
 
   if (!session) redirect("/");
+
+  const userFriendlyAddress =
+    session.user.tonAddress && toUserFriendlyAddress(session.user.tonAddress);
+  const truncatedAddress =
+    userFriendlyAddress &&
+    userFriendlyAddress.slice(0, 10) + "..." + userFriendlyAddress.slice(-10);
   return (
-    <main className=" flex min-h-[90vh] w-full flex-col items-center px-6">
-      <div className="my-auto flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
+    <main className=" flex min-h-[80vh] w-full flex-col items-center px-6">
+      <div className="mt-10 flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
         <h1 className="text-center text-4xl">Profile page</h1>
         <div className="flex w-full flex-col gap-4">
           <p className="text-xl	 font-semibold sm:text-base">TON Wallet:</p>
           <div className="flex flex-row items-center gap-2 sm:flex-col sm:text-sm">
             {session.user.tonAddress ? (
-              <p>{toUserFriendlyAddress(session.user.tonAddress)}</p>
+              <p className="w-full">{truncatedAddress}</p>
             ) : (
               <SingInButtonTON />
             )}
