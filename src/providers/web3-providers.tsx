@@ -11,7 +11,10 @@ import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 export function Providers(props: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
-      <TonConnectUIProvider manifestUrl="https://tonquest.vercel.app/tonconnect-manifest.json">
+      <TonConnectUIProvider
+        manifestUrl="https://tonquest.vercel.app/tonconnect-manifest.json"
+        restoreConnection={true}
+      >
         {props.children}
         <ProgressBar
           height="4px"

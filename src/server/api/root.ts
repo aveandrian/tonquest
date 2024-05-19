@@ -6,6 +6,7 @@ import { tonApiRouter } from "./routers/ton-api";
 import { questRouter } from "./routers/quest";
 import { questStepRouter } from "./routers/quest-steps";
 import { questProgressRouter } from "./routers/quest-progress";
+import { mintRouter } from "./routers/mint";
 
 /**
  * This is the primary router for your server.
@@ -20,6 +21,7 @@ export const appRouter = createTRPCRouter({
   quest: questRouter,
   questStep: questStepRouter,
   questProgress: questProgressRouter,
+  mint: mintRouter,
 });
 
 // export type definition of API

@@ -1,15 +1,21 @@
 import { z } from "zod";
-import { createTRPCRouter, publicProcedure } from "../trpc";
-import { client } from "@/lib/tonApiClient";
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc";
+import { client } from "@/lib/ton-api-client";
 import {
   ConvertTonProofMessage,
   CreateMessage,
   SignatureVerify,
-} from "@/lib/tonProof";
+} from "@/lib/ton-proof";
 import {
   type TonProofItemReplySuccess,
   type Wallet,
 } from "@tonconnect/ui-react";
+import {
+  restTonCenterClientV3,
+  restTonCenterClientV2,
+} from "@/lib/ton-center-client";
+import { type NftItemsInfoResponse } from "@/types/nft-items";
+import { type AccountBalanceResponse } from "@/types/account-balance";
 
 export const tonApiRouter = createTRPCRouter({
   checkTonProof: publicProcedure
@@ -63,5 +69,43 @@ export const tonApiRouter = createTRPCRouter({
     .input(z.object({ publicKey: z.string() }))
     .query(({ input }) => {
       return client.wallet.getWalletsByPublicKey(input.publicKey);
+    }),
+  getNftItems: protectedProcedure
+    .input(
+      z.object({
+        ownerAddress: z.string(),
+        nftId: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { data }: { data: NftItemsInfoResponse } =
+        await restTonCenterClientV3.get("/nft/items", {
+          params: {
+            owner_address: input.ownerAddress, //account address,
+            collection_address:
+              "kQAWtUxRA9LKDY7H5-iQVOCb_JxmCgBm42F9ACVBr9kQJ_k7",
+          },
+        });
+      const foundNft = data.nft_items.find(
+        (item) =>
+          item.content.uri ===
+          `ipfs://QmebtGwbuzSEANpUbsRUsSWgpJgvjb9FGioFUAGE2hxFxX/${input.nftId}.json`,
+      );
+      return foundNft ?? false;
+    }),
+  getAccountBalance: protectedProcedure
+    .input(
+      z.object({
+        address: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const { data }: { data: AccountBalanceResponse } =
+        await restTonCenterClientV2.get("/getAddressBalance", {
+          params: {
+            address: input.address,
+          },
+        });
+      return data;
     }),
 });

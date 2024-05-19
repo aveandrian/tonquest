@@ -83,7 +83,7 @@ model VerificationToken {
 model Mint {
     token         String   @id @db.VarChar
     wallet_string String?  @db.VarChar
-    nft_id        Int?
+    nft_id        String?
     is_minted     Boolean?
 }
 
@@ -101,6 +101,7 @@ model Quest {
     quest_description String
     steps             QuestStep[]
     UserQuestProgress UserQuestProgress[]
+    nft_id            String?             @unique
 }
 
 model QuestStep {

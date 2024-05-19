@@ -8,8 +8,8 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { api } from "@/trpc/react";
-import { QuestCard } from "./_components/quest-card";
-import { QuestCardHighlight } from "./_components/quest-card-highlight";
+import { QuestCard } from "./_components/quest/quest-card";
+import { QuestCardHighlight } from "./_components/quest/quest-card-highlight";
 
 export default function Home() {
   const router = useRouter();

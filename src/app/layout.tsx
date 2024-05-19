@@ -5,11 +5,11 @@ import { Inter } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
 
-import { Providers } from "./providers";
+import { Providers } from "@/providers/web3-providers";
 import { getServerAuthSession } from "@/server/auth";
-import { ContextSessionProviders } from "@/ContextSessionProviders";
-import { TonBackendAuthProvider } from "./TonBackendAuth";
-import Navigation from "./_components/navigation";
+import { ContextSessionProvider } from "@/providers/context-session-provider";
+import { TonBackendProvider } from "@/providers/ton-backend-provider";
+import Navigation from "@/app/_components/navbar/navigation";
 import { NextUIProvider } from "@nextui-org/react";
 import { Toaster } from "sonner";
 
@@ -45,15 +45,15 @@ export default async function RootLayout({
       >
         <Providers>
           <TRPCReactProvider>
-            <ContextSessionProviders serverSession={serverSession}>
-              <TonBackendAuthProvider>
+            <ContextSessionProvider serverSession={serverSession}>
+              <TonBackendProvider>
                 <NextUIProvider>
                   <Toaster position="top-right" richColors />
                   <Navigation />
                   {children}
                 </NextUIProvider>
-              </TonBackendAuthProvider>
-            </ContextSessionProviders>
+              </TonBackendProvider>
+            </ContextSessionProvider>
           </TRPCReactProvider>
         </Providers>
       </body>

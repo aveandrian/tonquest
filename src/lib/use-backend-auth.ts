@@ -5,7 +5,7 @@ import {
   useTonConnectUI,
   useTonWallet,
 } from "@tonconnect/ui-react";
-import { signIn, useSession } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export function useBackendAuth() {
   const isConnectionRestored = useIsConnectionRestored();
@@ -15,6 +15,15 @@ export function useBackendAuth() {
 
   useEffect(() => {
     if (!isConnectionRestored) {
+      return;
+    }
+
+    if (status === "loading") {
+      return;
+    }
+
+    if (session && !wallet) {
+      void signOut();
       return;
     }
 
@@ -37,7 +46,7 @@ export function useBackendAuth() {
       return;
     }
 
-    if (session && status === "authenticated") {
+    if (wallet && session && status === "authenticated") {
       console.log("user logged in");
       // setToken(token);
       return;

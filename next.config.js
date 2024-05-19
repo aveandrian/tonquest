@@ -28,6 +28,11 @@ const config = {
             hostname: 'flowbite.com',
             port: '',
           },
+          {
+            protocol: 'https',
+            hostname: 'indigo-foreign-manatee-785.mypinata.cloud',
+            port: '',
+          },
         ],
       },
 };

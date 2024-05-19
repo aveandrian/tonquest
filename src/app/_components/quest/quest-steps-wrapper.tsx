@@ -7,8 +7,10 @@ import { api } from "@/trpc/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { Spinner } from "@nextui-org/react";
-import { CheckmarkAnimation } from "./checkmark-animation";
+import { CheckmarkAnimation } from "../images/checkmark-animation";
 import { motion } from "framer-motion";
+import { QuestStepMint } from "./quest-step-mint";
+import { Image } from "@nextui-org/react";
 
 export function QuestStepsWrapper({
   stepsInfo,
@@ -102,6 +104,20 @@ export function QuestStepsWrapper({
               ) : null}
             </div>
           ))}
+        {!isLoadingUserProgress && userQuestProgress !== undefined && (
+          <div className="relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2">
+            <p className="z-10 font-semibold">
+              {questInfo.nft_id ? "Claim your reward" : "Congrats!"}
+            </p>
+            <p className="z-10">🥳</p>
+            {stepsInfo.length === currentStepIndex ? (
+              <motion.div
+                className="absolute left-0 top-0 h-full w-full overflow-hidden rounded-md border-2 border-solid border-sandyBrown bg-sandyBrown"
+                layoutId="underline"
+              />
+            ) : null}
+          </div>
+        )}
       </div>
       {isLoadingUserProgress ? (
         <div className=" col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5">
@@ -109,9 +125,26 @@ export function QuestStepsWrapper({
           <Spinner></Spinner>
         </div>
       ) : !!userQuestProgress?.completed ? (
-        <div className=" col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-1 rounded-lg border-5 border-double border-blue p-5">
-          <CheckmarkAnimation />
-          <h1 className="text-2xl">You&apos;ve done it!</h1>
+        <div className="col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5">
+          {questInfo.nft_id ? (
+            <>
+              <div className="w-[50%] sm:w-full">
+                <Image
+                  alt="NFT image"
+                  src={`https://indigo-foreign-manatee-785.mypinata.cloud/ipfs/QmP2srX58NrKRm2aomDtdkhj4uVbBuNFvhQBrWrKqwmFL9/${questInfo.nft_id}.jpg`}
+                />
+              </div>
+              <h1 className="text-center text-2xl">
+                Now you can collect your NFT!
+              </h1>
+              <QuestStepMint itemId={questInfo.nft_id} />
+            </>
+          ) : (
+            <>
+              <CheckmarkAnimation />
+              <h1 className="text-2xl">You&apos;ve done it!</h1>
+            </>
+          )}
         </div>
       ) : (
         !userQuestProgress?.completed &&

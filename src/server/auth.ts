@@ -15,12 +15,12 @@ import { getCsrfToken } from "next-auth/react";
 
 import { env } from "@/env";
 import { db } from "@/server/db";
-import { client } from "@/lib/tonApiClient";
+import { client } from "@/lib/ton-api-client";
 import {
   ConvertTonProofMessage,
   CreateMessage,
   SignatureVerify,
-} from "@/lib/tonProof";
+} from "@/lib/ton-proof";
 import {
   type TonProofItemReplySuccess,
   type Wallet,
@@ -254,7 +254,6 @@ export const authOptions: NextAuthOptions = {
 
             return newUserModel;
           } else if (result.success && currentUser && !currentUser.address) {
-            console.log("currentUser", currentUser);
             console.log("User exist but doesn't have address");
             const updatedUser = await db.user.update({
               where: {

@@ -1,11 +1,11 @@
 "use client";
-import SingInButtonDiscord from "../_components/sign-in-button-discord";
-import SingInButtonTwitter from "../_components/sign-in-button-twitter";
-import SingInButtonEVM from "../_components/sign-in-button-evm";
-import RemoveAccountButton from "../_components/remove-account-button";
+import SingInButtonDiscord from "../_components/accounts/sign-in-button-discord";
+import SingInButtonTwitter from "../_components/accounts/sign-in-button-twitter";
+import SingInButtonEVM from "../_components/accounts/sign-in-button-evm";
+import RemoveAccountButton from "../_components/accounts/remove-account-button";
 import { redirect } from "next/navigation";
-import SingInButtonTON from "../_components/sign-in-button-ton";
-import SignOutButton from "../_components/sign-out-button";
+import SingInButtonTON from "../_components/accounts/sign-in-button-ton";
+import SignOutButton from "../_components/accounts/sign-out-button";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";

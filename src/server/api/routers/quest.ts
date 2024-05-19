@@ -10,7 +10,7 @@ export const questRouter = createTRPCRouter({
       });
     }),
   getAllQuests: protectedProcedure.query(({ ctx }) => {
-    return ctx.db.quest.findMany();
+    return ctx.db.quest.findMany({ orderBy: { quest_id: "asc" } });
   }),
   getCompletedQuestsByUser: protectedProcedure.query(({ ctx }) => {
     return ctx.db.userQuestProgress.findMany({

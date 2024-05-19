@@ -27,7 +27,9 @@ export const env = createEnv({
     TWITTER_ID:  z.string(),
     TWITTER_SECRET:  z.string(),  
     JWT_SECRET: z.string(),
-    TON_API_KEY: z.string()
+    TON_API_KEY: z.string(),
+    TON_CENTER_KEY: z.string(),
+    COLLECTION_OWNER: z.string(),
   },
   
 
@@ -54,6 +56,8 @@ export const env = createEnv({
     TWITTER_SECRET: process.env.TWITTER_SECRET, 
     JWT_SECRET: process.env.JWT_SECRET, 
     TON_API_KEY: process.env.TON_API_KEY, 
+    TON_CENTER_KEY: process.env.TON_CENTER_KEY,
+    COLLECTION_OWNER: process.env.COLLECTION_OWNER,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

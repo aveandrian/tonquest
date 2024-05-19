@@ -7,7 +7,7 @@ import {
   Button,
   Link,
 } from "@nextui-org/react";
-import SignOutButton from "./sign-out-button";
+import SignOutButton from "../accounts/sign-out-button";
 
 export default function NavbarProfile() {
   return (

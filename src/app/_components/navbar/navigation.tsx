@@ -1,5 +1,5 @@
 "use client";
-import SingInButtonTON from "./sign-in-button-ton";
+import SingInButtonTON from "../accounts/sign-in-button-ton";
 import { useSession } from "next-auth/react";
 import NavbarProfile from "./navbar-profile";
 import {
@@ -10,7 +10,7 @@ import {
   Spinner,
 } from "@nextui-org/react";
 
-import TonQuestLogo from "@/app/_components/ton-quest-logo";
+import TonQuestLogo from "@/app/_components/images/ton-quest-logo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 

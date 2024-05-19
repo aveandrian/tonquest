@@ -30,7 +30,6 @@ export default function RemoveAccountButton({
         await update({ discord: null });
       }
 
-      // router.refresh();
       if (provider === "Ethereum") {
         disconnect();
       }
