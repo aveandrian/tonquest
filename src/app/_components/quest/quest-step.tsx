@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { QuestStepTwitter } from "./quest-step-twitter";
 import { QuestStepDiscord } from "./quest-step-discord";
+import Markdown from "react-markdown";
 
 export function QuestStepComponent({
   stepInfo,
@@ -44,9 +45,9 @@ export function QuestStepComponent({
         <h1 className="mt-5 text-center text-3xl sm:w-full sm:text-xl ">
           {stepInfo.step_title}
         </h1>
-        <p className="w-3/4 text-center text-lg sm:w-full sm:text-sm">
+        <Markdown className="w-3/4 text-center text-lg sm:w-full sm:text-sm">
           {stepInfo.step_description}
-        </p>
+        </Markdown>
         {!session && (
           <p className="underline underline-offset-4">
             You need to log in first

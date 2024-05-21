@@ -71,6 +71,11 @@ export function QuestStepMint({ itemId }: { itemId: string }) {
       const res = await tonConnectUI.sendTransaction(transaction);
       const txRes = await getTxByBOC(res.boc, address);
       setTxHash(txRes);
+      toast.success(
+        "Transaction successfull. You will find NFT in your wallet shortly",
+      );
+      setIsButtonDisabled(true);
+      setButtonText("MINTED");
     } catch (e: unknown) {
       if (e instanceof TonConnectError) {
         if (e instanceof UserRejectsError) {
