@@ -90,7 +90,6 @@ export default function Home() {
                     key={quest.quest_id}
                     questId={quest.quest_id}
                     questTitle={quest.quest_name}
-                    questDescription={quest.quest_description}
                     questSlug={quest.quest_slug}
                     isCompleted={
                       Boolean(

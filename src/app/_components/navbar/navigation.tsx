@@ -41,6 +41,14 @@ export default function Navigation() {
             Explore
           </Link>
         </NavbarItem>
+        <NavbarItem>
+          <Link
+            href="/score"
+            className={`link ${pathname === "/score" ? "underline decoration-double	underline-offset-2	" : ""} `}
+          >
+            Score
+          </Link>
+        </NavbarItem>
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="lg:flex">

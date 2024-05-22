@@ -28,7 +28,7 @@ export function QuestStepMint({ itemId }: { itemId: string }) {
   const address = useTonAddress();
 
   const { data: userNftItemInfo, isLoading: isUserNftInfoLoading } =
-    api.tonApi.getNftItems.useQuery(
+    api.tonApi.getQuestNftItems.useQuery(
       {
         ownerAddress: address,
         nftId: itemId,

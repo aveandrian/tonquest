@@ -1,7 +1,7 @@
 "use client";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, CardBody, CardFooter, Link, Image } from "@nextui-org/react";
+import { Card, CardBody, Link, Image } from "@nextui-org/react";
 import { useRouter } from "next-nprogress-bar";
 
 export function QuestCardHighlight({

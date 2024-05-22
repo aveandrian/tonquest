@@ -1,26 +1,17 @@
 "use client";
-import { faCheck, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  Link,
-  Image,
-  Button,
-} from "@nextui-org/react";
+import { Card, CardFooter, Link, Image, Button } from "@nextui-org/react";
 import { useRouter } from "next-nprogress-bar";
 
 export function QuestCard({
   questId,
   questTitle,
-  questDescription,
   questSlug,
   isCompleted,
 }: {
   questId: number;
   questTitle: string;
-  questDescription: string;
   questSlug: string;
   isCompleted: boolean;
 }) {

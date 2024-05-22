@@ -70,7 +70,7 @@ export const tonApiRouter = createTRPCRouter({
     .query(({ input }) => {
       return client.wallet.getWalletsByPublicKey(input.publicKey);
     }),
-  getNftItems: protectedProcedure
+  getQuestNftItems: protectedProcedure
     .input(
       z.object({
         ownerAddress: z.string(),
@@ -92,6 +92,16 @@ export const tonApiRouter = createTRPCRouter({
           `ipfs://QmebtGwbuzSEANpUbsRUsSWgpJgvjb9FGioFUAGE2hxFxX/${input.nftId}.json`,
       );
       return foundNft ?? false;
+    }),
+  getAllAccountNfts: protectedProcedure
+    .input(
+      z.object({
+        ownerAddress: z.string(),
+      }),
+    )
+    .query(async ({ input }) => {
+      const res = await client.accounts.getAccountNftItems(input.ownerAddress);
+      return res.nft_items;
     }),
   getAccountBalance: protectedProcedure
     .input(
