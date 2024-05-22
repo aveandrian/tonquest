@@ -59,36 +59,36 @@ export default function Home() {
         !completedQuestsByUser.isLoading &&
         (completedQuestsByUser?.data?.length ?? 0) > 0 && (
           <>
-            <div className="h-[20vh] w-full">
-              {questHighlight && (
-                <QuestCardHighlight
-                  questTitle={questHighlight.quest_name}
-                  questDescription={questHighlight.quest_description}
-                  questSlug={questHighlight.quest_slug}
-                  isCompleted={
-                    Boolean(
-                      completedQuestsByUser?.data?.length &&
-                        completedQuestsByUser?.data.find(
-                          (completedQuest) =>
-                            completedQuest.quest.quest_id ===
-                            questHighlight.quest_id,
-                        ),
-                    ) ?? false
-                  }
-                />
-              )}
-            </div>
+            {questHighlight && (
+              <QuestCardHighlight
+                questId={questHighlight.quest_id}
+                questTitle={questHighlight.quest_name}
+                questDescription={questHighlight.quest_description}
+                questSlug={questHighlight.quest_slug}
+                isCompleted={
+                  Boolean(
+                    completedQuestsByUser?.data?.length &&
+                      completedQuestsByUser?.data.find(
+                        (completedQuest) =>
+                          completedQuest.quest.quest_id ===
+                          questHighlight.quest_id,
+                      ),
+                  ) ?? false
+                }
+              />
+            )}
             <div className="mt-5 flex flex-col gap-4">
               <div className="flex flex-col gap-2">
-                <h1 className="text-lg">Starting quests</h1>
-                <p className="text-xs">
+                <h1 className="text-xl">Starting quests</h1>
+                <p className="text-sm">
                   One small step for human and a giant leap for humanity
                 </p>
               </div>
-              <div className="grid w-full grid-cols-4 gap-5 sm:grid-cols-2 sm:gap-2">
+              <div className="grid w-full grid-cols-3 gap-5 sm:grid-cols-2 sm:gap-5">
                 {allQuests?.data?.map((quest) => (
                   <QuestCard
                     key={quest.quest_id}
+                    questId={quest.quest_id}
                     questTitle={quest.quest_name}
                     questDescription={quest.quest_description}
                     questSlug={quest.quest_slug}
