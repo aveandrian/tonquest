@@ -38,6 +38,18 @@ export default function NavbarProfile() {
             Profile
           </Button>
         </DropdownItem>
+        <DropdownItem key="score">
+          <Button
+            href="/score"
+            as={Link}
+            color="primary"
+            variant="solid"
+            fullWidth={true}
+            className="font-bold uppercase text-blue"
+          >
+            Score
+          </Button>
+        </DropdownItem>
         <DropdownItem key="signout" className="sm:hidden">
           <SignOutButton />
         </DropdownItem>

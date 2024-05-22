@@ -17,6 +17,7 @@ export function UserNftTable() {
   return (
     <div className="grid grid-cols-2 gap-5 sm:grid-cols-1">
       {isUserNftInfoLoading && <Spinner />}
+      {userNftItems?.length === 0 && <p>You don&apos;t own any NFTs</p>}
       {userNftItems?.map((nftItem) => (
         <Card
           key={nftItem.address}
