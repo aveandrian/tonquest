@@ -36,7 +36,7 @@ export default function Navigation() {
         <NavbarItem>
           <Link
             href="/"
-            className={`link ${pathname === "/" ? "underline decoration-double	underline-offset-2	" : ""} `}
+            className={`link ${pathname === "/" ? "underline decoration-double	underline-offset-2	" : ""} font-semibold `}
           >
             Explore
           </Link>
@@ -44,7 +44,7 @@ export default function Navigation() {
         <NavbarItem>
           <Link
             href="/score"
-            className={`link ${pathname === "/score" ? "underline decoration-double	underline-offset-2	" : ""} `}
+            className={`link ${pathname === "/score" ? "underline decoration-double	underline-offset-2	" : ""} font-semibold `}
           >
             Score
           </Link>
