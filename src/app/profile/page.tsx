@@ -35,7 +35,7 @@ export default function Profile() {
     userFriendlyAddress &&
     userFriendlyAddress.slice(0, 10) + "..." + userFriendlyAddress.slice(-10);
   return (
-    <main className=" flex min-h-[80vh] w-full flex-col items-center px-6">
+    <main className=" flex h-full min-h-[80vh] w-full flex-col items-center px-6">
       <div className="mt-10 flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
         <h1 className="text-center text-4xl">Profile page</h1>
         <div className="flex w-full flex-col gap-4">
@@ -87,8 +87,9 @@ export default function Profile() {
             )}
           </div>
         </div>
-
-        <SignOutButton />
+        <div className="mt-auto w-[50%]">
+          <SignOutButton />
+        </div>
       </div>
     </main>
   );
