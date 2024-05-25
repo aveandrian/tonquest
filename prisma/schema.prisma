@@ -114,6 +114,7 @@ model QuestStep {
     UserQuestProgress UserQuestProgress[]
     step_type         StepType?           @relation(fields: [step_type_id], references: [id])
     step_type_id      Int?
+    nft_id            Int?
 
     @@unique([quest_id, step_order]) // Composite unique constraint
 }

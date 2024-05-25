@@ -1,9 +1,9 @@
 import { getServerAuthSession } from "@/server/auth";
 import { redirect } from "next/navigation";
-import { ScoreCard } from "../_components/score/ScoreCard";
-import { UserInfo } from "../_components/score/UserInfo";
-import { UserVolumeTable } from "../_components/score/UserVolumeTable";
-import { UserNftTable } from "../_components/score/UserNftTable";
+import { ScoreCard } from "@/app/_components/score/ScoreCard";
+import { UserInfo } from "@/app/_components/score/UserInfo";
+import { UserVolumeTable } from "@/app/_components/score/UserVolumeTable";
+import { UserNftTable } from "@/app/_components/score/UserNftTable";
 
 export default async function ScorePage() {
   const session = await getServerAuthSession();

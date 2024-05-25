@@ -1,5 +1,5 @@
 "use client";
-import { SignInButtonTON } from "../accounts/SignInButtonTON";
+import { SignInButtonTON } from "@/app/_components/accounts/SignInButtonTON";
 import { useSession } from "next-auth/react";
 import { NavbarProfile } from "@/app/_components/navbar/NavbarProfile";
 import {

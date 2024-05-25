@@ -11,7 +11,7 @@ import { ContextSessionProvider } from "@/providers/context-session-provider";
 import { TonBackendProvider } from "@/providers/ton-backend-provider";
 import { NextUIProvider } from "@nextui-org/react";
 import { Toaster } from "sonner";
-import { Navigation } from "./_components/navbar/navigation";
+import { Navigation } from "@/app/_components/navbar/Navigation";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
@@ -39,6 +39,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="02ac0f1d-adf8-4338-8153-347030b4eeec"
+        ></script>
+      </head>
       <body
         className={`min-h-screen font-sans ${inter.variable}  bg-background text-foreground light `}
         suppressHydrationWarning={true}

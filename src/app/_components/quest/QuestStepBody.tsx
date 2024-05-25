@@ -4,8 +4,8 @@ import { Button } from "@nextui-org/react";
 import { type QuestStep } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { QuestStepTwitter } from "./QuestStepTwitter";
-import { QuestStepDiscord } from "./QuestStepDiscord";
+import { QuestStepTwitter } from "@/app/_components/quest/QuestStepTwitter";
+import { QuestStepDiscord } from "@/app/_components/quest/QuestStepDiscord";
 import Markdown from "react-markdown";
 
 export function QuestStepBody({
