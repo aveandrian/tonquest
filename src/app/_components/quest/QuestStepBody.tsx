@@ -22,15 +22,15 @@ export function QuestStepBody({
   isStepCompleted: boolean;
 }) {
   const { data: session } = useSession();
-  const isTwitterQuest = stepInfo.step_type_id === 1;
-  const isDiscordQuest = stepInfo.step_type_id === 2;
+  const isTwitterQuest = stepInfo.step_type_id === 2;
+  const isDiscordQuest = stepInfo.step_type_id === 3;
 
   const [isFollowClicked, setIsFollowClicked] = useState<boolean>(true);
 
   useEffect(() => {
     if (
-      (stepInfo.step_type_id === 1 && !isStepCompleted) ||
-      (stepInfo.step_type_id === 2 && !isStepCompleted)
+      (stepInfo.step_type_id === 2 && !isStepCompleted) ||
+      (stepInfo.step_type_id === 3 && !isStepCompleted)
     )
       setIsFollowClicked(false);
   }, [isStepCompleted, stepInfo.step_type_id]);
