@@ -26,7 +26,7 @@ export const questStepRouter = createTRPCRouter({
       return ctx.db.questStep.create({
         data: {
           quest_id: input.questId,
-          step_type: input.stepType,
+          step_type_id: input.stepType,
           step_title: input.stepTitle,
           step_description: input.stepDescription,
           step_order: 0,
@@ -49,7 +49,7 @@ export const questStepRouter = createTRPCRouter({
     .mutation(({ ctx, input }) => {
       const data = input.map((step) => ({
         quest_id: step.questId,
-        step_type: step.stepType,
+        step_type_id: step.stepType,
         step_title: step.stepTitle,
         step_description: step.stepDescription,
         step_order: step.stepOrder,

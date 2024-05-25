@@ -22,18 +22,18 @@ export function QuestStepComponent({
   isStepCompleted: boolean;
 }) {
   const { data: session } = useSession();
-  const isTwitterQuest = stepInfo.step_type === 1;
-  const isDiscordQuest = stepInfo.step_type === 2;
+  const isTwitterQuest = stepInfo.step_type_id === 1;
+  const isDiscordQuest = stepInfo.step_type_id === 2;
 
   const [isFollowClicked, setIsFollowClicked] = useState<boolean>(true);
 
   useEffect(() => {
     if (
-      (stepInfo.step_type === 1 && !isStepCompleted) ||
-      (stepInfo.step_type === 2 && !isStepCompleted)
+      (stepInfo.step_type_id === 1 && !isStepCompleted) ||
+      (stepInfo.step_type_id === 2 && !isStepCompleted)
     )
       setIsFollowClicked(false);
-  }, [isStepCompleted, stepInfo.step_type]);
+  }, [isStepCompleted, stepInfo.step_type_id]);
 
   function handleFollowClick() {
     setIsFollowClicked(true);

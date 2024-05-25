@@ -108,11 +108,18 @@ model QuestStep {
     step_id           Int                 @id @default(autoincrement())
     quest_id          Int
     quest             Quest               @relation(fields: [quest_id], references: [quest_id])
-    step_type         Int
     step_title        String
     step_description  String
     step_order        Int
     UserQuestProgress UserQuestProgress[]
+    step_type         StepType?           @relation(fields: [step_type_id], references: [id])
+    step_type_id      Int?
+}
+
+model StepType {
+    id          Int         @id @default(autoincrement())
+    description String
+    questSteps  QuestStep[]
 }
 
 model UserQuestProgress {
