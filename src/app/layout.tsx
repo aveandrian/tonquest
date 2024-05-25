@@ -11,8 +11,7 @@ import { ContextSessionProvider } from "@/providers/context-session-provider";
 import { TonBackendProvider } from "@/providers/ton-backend-provider";
 import { NextUIProvider } from "@nextui-org/react";
 import { Toaster } from "sonner";
-import { Navigation } from "@/app/_components/navbar/Navigation";
-
+import { NavbarMain } from "@/app/_components/navbar/NavbarMain";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 
@@ -56,7 +55,7 @@ export default async function RootLayout({
               <TonBackendProvider>
                 <NextUIProvider>
                   <Toaster position="top-right" richColors />
-                  <Navigation />
+                  <NavbarMain />
                   {children}
                 </NextUIProvider>
               </TonBackendProvider>

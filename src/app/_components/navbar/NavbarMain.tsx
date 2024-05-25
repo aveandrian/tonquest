@@ -14,7 +14,7 @@ import { TonQuestLogo } from "@/app/_components/images/TonQuestLogo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export function Navigation() {
+export function NavbarMain() {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   return (
