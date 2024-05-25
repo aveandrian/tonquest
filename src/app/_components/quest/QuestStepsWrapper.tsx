@@ -4,14 +4,12 @@ import { type Quest, type QuestStep } from "@prisma/client";
 import { QuestStepBody } from "@/app/_components/quest/QuestStepBody";
 import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { Spinner } from "@nextui-org/react";
 import { CheckmarkAnimation } from "@/app/_components/images/CheckmarkAnimation";
-import { motion } from "framer-motion";
 import { QuestStepMint } from "@/app/_components/quest/QuestStepMint";
 
 import { Image } from "@nextui-org/react";
+import { QuestStepsNavigation } from "@/app/_components/quest/QuestStepsNavigation";
 
 export function QuestStepsWrapper({
   stepsInfo,
@@ -79,54 +77,19 @@ export function QuestStepsWrapper({
         className={`col-span-1 ${!isLoadingUserProgress ? "mt-auto" : "justify-center"} flex h-fit flex-col gap-1 sm:hidden`}
       >
         {isLoadingUserProgress && <Spinner className="justify-center" />}
-        {!isLoadingUserProgress &&
-          userQuestProgress !== undefined &&
-          stepsInfo.map((step, i) => (
-            <div
-              key={step.step_id}
-              className="relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2"
-            >
-              <p className="z-10 font-semibold">{step.step_title}</p>
-              {userQuestProgress &&
-                i <= userQuestProgress?.current_step_order && (
-                  <FontAwesomeIcon
-                    icon={faCheckCircle}
-                    size="lg"
-                    color="teal"
-                    className="z-10"
-                  />
-                )}
-              {currentStepInfo?.step_order === i ? (
-                <motion.div
-                  className="absolute left-0 top-0 h-full w-full overflow-hidden rounded-md border-2 border-solid border-sandyBrown bg-sandyBrown"
-                  layoutId="underline"
-                />
-              ) : null}
-            </div>
-          ))}
         {!isLoadingUserProgress && userQuestProgress !== undefined && (
-          <div className="relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2">
-            <p className="z-10 font-semibold">
-              {questInfo.nft_id ? "Claim your reward" : "Congrats!"}
-            </p>
-            <p className="z-10">🥳</p>
-            {stepsInfo.length === currentStepIndex ? (
-              <motion.div
-                className="absolute left-0 top-0 h-full w-full overflow-hidden rounded-md border-2 border-solid border-sandyBrown bg-sandyBrown"
-                layoutId="underline"
-              />
-            ) : null}
-          </div>
+          <QuestStepsNavigation
+            userQuestProgress={userQuestProgress}
+            stepsInfo={stepsInfo}
+            currentStepInfo={currentStepInfo}
+          />
         )}
       </div>
-      {isLoadingUserProgress ? (
-        <div className=" col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5">
-          {" "}
-          <Spinner></Spinner>
-        </div>
-      ) : !!userQuestProgress?.completed ? (
-        <div className="col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5">
-          {questInfo.nft_id ? (
+      <div className="col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5 sm:p-2">
+        {isLoadingUserProgress ? (
+          <Spinner />
+        ) : !!userQuestProgress?.completed ? (
+          questInfo.nft_id ? (
             <>
               <div className="w-[50%] sm:w-full">
                 <Image
@@ -144,23 +107,24 @@ export function QuestStepsWrapper({
               <CheckmarkAnimation />
               <h1 className="text-2xl">You&apos;ve done it!</h1>
             </>
-          )}
-        </div>
-      ) : (
-        !userQuestProgress?.completed &&
-        currentStepInfo && (
-          <QuestStepBody
-            isLastStep={isLastStep}
-            stepInfo={currentStepInfo}
-            handleStepChange={handleStepChange}
-            isButtonLoading={sendStepCompleted.isPending}
-            isStepCompleted={Boolean(
-              userQuestProgress &&
-                currentStepInfo.step_order < userQuestProgress?.current_step_id,
-            )}
-          />
-        )
-      )}
+          )
+        ) : (
+          !userQuestProgress?.completed &&
+          currentStepInfo && (
+            <QuestStepBody
+              isLastStep={isLastStep}
+              stepInfo={currentStepInfo}
+              handleStepChange={handleStepChange}
+              isButtonLoading={sendStepCompleted.isPending}
+              isStepCompleted={Boolean(
+                userQuestProgress &&
+                  currentStepInfo.step_order <
+                    userQuestProgress?.current_step_id,
+              )}
+            />
+          )
+        )}
+      </div>
     </div>
   );
 }

@@ -40,7 +40,7 @@ export function QuestStepBody({
   }
 
   return (
-    <div className="col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5 sm:p-2">
+    <>
       <div className="mt-auto flex h-full flex-col items-center justify-center gap-5">
         <h1 className="mt-5 text-center text-3xl sm:w-full sm:text-xl ">
           {stepInfo.step_title}
@@ -89,6 +89,6 @@ export function QuestStepBody({
           {isLastStep ? "Finish" : "Next"}
         </Button>
       </div>
-    </div>
+    </>
   );
 }
