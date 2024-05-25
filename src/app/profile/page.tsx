@@ -1,18 +1,19 @@
 "use client";
-import SingInButtonDiscord from "../_components/accounts/sign-in-button-discord";
-import SingInButtonTwitter from "../_components/accounts/sign-in-button-twitter";
-import SingInButtonEVM from "../_components/accounts/sign-in-button-evm";
-import RemoveAccountButton from "../_components/accounts/remove-account-button";
+
 import { redirect } from "next/navigation";
-import SingInButtonTON from "../_components/accounts/sign-in-button-ton";
-import SignOutButton from "../_components/accounts/sign-out-button";
 import { useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { toast } from "sonner";
 import { toUserFriendlyAddress } from "@tonconnect/sdk";
+import { SignInButtonTON } from "@/app/_components/accounts/SignInButtonTON";
+import { SignInButtonDiscord } from "@/app/_components/accounts/SignInButtonDiscord";
+import { RemoveAccountButton } from "@/app/_components/accounts/RemoveAccountButton";
+import { SignInButtonEVM } from "@/app/_components/accounts/SignInButtonEVM";
+import { SignInButtonTwitter } from "@/app/_components/accounts/SignInButtonTwitter";
+import { SignOutButton } from "@/app/_components/accounts/SignOutButton";
 
-export default function Profile() {
+export default function ProfilePage() {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const error = searchParams.get("error");
@@ -44,7 +45,7 @@ export default function Profile() {
             {session.user.tonAddress ? (
               <p className="w-full">{truncatedAddress}</p>
             ) : (
-              <SingInButtonTON />
+              <SignInButtonTON />
             )}
           </div>
         </div>
@@ -57,7 +58,7 @@ export default function Profile() {
                 <RemoveAccountButton provider="discord" />
               </>
             ) : (
-              <SingInButtonDiscord />
+              <SignInButtonDiscord />
             )}
           </div>
         </div>
@@ -70,7 +71,7 @@ export default function Profile() {
                 <RemoveAccountButton provider="twitter" />
               </>
             ) : (
-              <SingInButtonTwitter />
+              <SignInButtonTwitter />
             )}
           </div>
         </div>
@@ -83,7 +84,7 @@ export default function Profile() {
                 <RemoveAccountButton provider="Ethereum" />
               </>
             ) : (
-              <SingInButtonEVM />
+              <SignInButtonEVM />
             )}
           </div>
         </div>

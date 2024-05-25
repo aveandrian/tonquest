@@ -1,15 +1,16 @@
 "use client";
 
 import { type Quest, type QuestStep } from "@prisma/client";
-import { QuestStepComponent } from "./quest-step";
+import { QuestStepBody } from "@/app/_components/quest/QuestStepBody";
 import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { Spinner } from "@nextui-org/react";
-import { CheckmarkAnimation } from "../images/checkmark-animation";
+import { CheckmarkAnimation } from "@/app/_components/images/CheckmarkAnimation";
 import { motion } from "framer-motion";
-import { QuestStepMint } from "./quest-step-mint";
+import { QuestStepMint } from "@/app/_components/quest/QuestStepMint";
+
 import { Image } from "@nextui-org/react";
 
 export function QuestStepsWrapper({
@@ -148,7 +149,7 @@ export function QuestStepsWrapper({
       ) : (
         !userQuestProgress?.completed &&
         currentStepInfo && (
-          <QuestStepComponent
+          <QuestStepBody
             isLastStep={isLastStep}
             stepInfo={currentStepInfo}
             handleStepChange={handleStepChange}

@@ -1,5 +1,5 @@
 import { Spinner } from "@nextui-org/react";
 
-export default function ScoreLoading() {
+export default function ScorePageLoading() {
   return <Spinner />;
 }

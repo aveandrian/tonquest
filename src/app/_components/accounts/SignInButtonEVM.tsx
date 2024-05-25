@@ -7,7 +7,7 @@ import { useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next-nprogress-bar";
 
-export default function SingInButtonEVM() {
+export function SignInButtonEVM() {
   const { signMessageAsync } = useSignMessage();
   const chainId = useChainId();
   const { address, isConnected } = useAccount();

@@ -12,11 +12,7 @@ const PROVIDER_MAP: Record<string, string> = {
   TON: "ton_address",
 };
 
-export default function RemoveAccountButton({
-  provider,
-}: {
-  provider: string;
-}) {
+export function RemoveAccountButton({ provider }: { provider: string }) {
   const { disconnect } = useDisconnect();
   const { update } = useSession();
 

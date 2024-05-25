@@ -9,9 +9,9 @@ import { Providers } from "@/providers/web3-providers";
 import { getServerAuthSession } from "@/server/auth";
 import { ContextSessionProvider } from "@/providers/context-session-provider";
 import { TonBackendProvider } from "@/providers/ton-backend-provider";
-import Navigation from "@/app/_components/navbar/navigation";
 import { NextUIProvider } from "@nextui-org/react";
 import { Toaster } from "sonner";
+import { Navigation } from "./_components/navbar/navigation";
 
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";

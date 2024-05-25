@@ -3,14 +3,14 @@
 import { signIn } from "next-auth/react";
 import { Button } from "@nextui-org/react";
 
-export default function SingInButtonTwitter() {
+export function SignInButtonDiscord() {
   return (
     <Button
-      onClick={() => signIn("twitter", { callbackUrl: "/profile" })}
+      onClick={() => signIn("discord", { callbackUrl: "/profile" })}
       color="primary"
       className="font-bold text-blue"
     >
-      Connect Twitter
+      Connect Discord
     </Button>
   );
 }

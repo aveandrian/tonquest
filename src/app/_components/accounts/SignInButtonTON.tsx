@@ -6,7 +6,7 @@ import {
   useTonWallet,
 } from "@tonconnect/ui-react";
 
-export default function SingInButtonTON() {
+export function SignInButtonTON() {
   const tonConnectModal = useTonConnectModal();
   const isConnectionRestored = useIsConnectionRestored();
   const wallet = useTonWallet();

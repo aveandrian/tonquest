@@ -1,7 +1,7 @@
 "use client";
-import SingInButtonTON from "../accounts/sign-in-button-ton";
+import { SignInButtonTON } from "../accounts/SignInButtonTON";
 import { useSession } from "next-auth/react";
-import NavbarProfile from "./navbar-profile";
+import { NavbarProfile } from "@/app/_components/navbar/NavbarProfile";
 import {
   Navbar,
   NavbarBrand,
@@ -10,11 +10,11 @@ import {
   Spinner,
 } from "@nextui-org/react";
 
-import TonQuestLogo from "@/app/_components/images/ton-quest-logo";
+import { TonQuestLogo } from "@/app/_components/images/TonQuestLogo";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 
-export default function Navigation() {
+export function Navigation() {
   const { data: session, status } = useSession();
   const pathname = usePathname();
   return (
@@ -53,7 +53,7 @@ export default function Navigation() {
       <NavbarContent justify="end">
         <NavbarItem className="lg:flex">
           {status === "loading" && <Spinner />}
-          {!session && status !== "loading" && <SingInButtonTON />}
+          {!session && status !== "loading" && <SignInButtonTON />}
           {!!session && <NavbarProfile />}
         </NavbarItem>
       </NavbarContent>

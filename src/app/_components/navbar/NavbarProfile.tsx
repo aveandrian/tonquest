@@ -7,9 +7,9 @@ import {
   Button,
   Link,
 } from "@nextui-org/react";
-import SignOutButton from "../accounts/sign-out-button";
+import { SignOutButton } from "@/app/_components/accounts/SignOutButton";
 
-export default function NavbarProfile() {
+export function NavbarProfile() {
   return (
     <Dropdown className="bg-background">
       <DropdownTrigger>

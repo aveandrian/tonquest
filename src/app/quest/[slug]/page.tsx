@@ -1,10 +1,10 @@
-import { QuestStepsWrapper } from "@/app/_components/quest/quest-steps-wrapper";
+import { QuestStepsWrapper } from "@/app/_components/quest/QuestStepsWrapper";
 import { getServerAuthSession } from "@/server/auth";
 import { api } from "@/trpc/server";
 import { type Quest } from "@prisma/client";
 import { redirect } from "next/navigation";
 
-export default async function QuestWrapper({
+export default async function QuestPage({
   params,
 }: {
   params: { slug: string };

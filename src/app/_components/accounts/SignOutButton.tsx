@@ -5,7 +5,7 @@ import { Button } from "@nextui-org/react";
 import { useAccount, useDisconnect } from "wagmi";
 import { useTonConnectUI, useTonWallet } from "@tonconnect/ui-react";
 
-export default function SignOutButton() {
+export function SignOutButton() {
   const { disconnect } = useDisconnect();
   const { isConnected } = useAccount();
 

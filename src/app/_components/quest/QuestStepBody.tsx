@@ -4,11 +4,11 @@ import { Button } from "@nextui-org/react";
 import { type QuestStep } from "@prisma/client";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { QuestStepTwitter } from "./quest-step-twitter";
-import { QuestStepDiscord } from "./quest-step-discord";
+import { QuestStepTwitter } from "./QuestStepTwitter";
+import { QuestStepDiscord } from "./QuestStepDiscord";
 import Markdown from "react-markdown";
 
-export function QuestStepComponent({
+export function QuestStepBody({
   stepInfo,
   handleStepChange,
   isLastStep,
