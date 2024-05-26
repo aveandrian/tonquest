@@ -13,10 +13,12 @@ import {
   createMintTransactionPayload,
   getTxByBOC,
 } from "@/lib/ton-center-client";
+import { Image } from "@nextui-org/react";
+import { type QuestStep } from "@prisma/client";
 
 const BALANCE_TO_MINT = 60000000;
 
-export function QuestStepMint({ itemId }: { itemId: string }) {
+export function QuestStepMint({ stepInfo }: { stepInfo: QuestStep }) {
   const [tonConnectUI] = useTonConnectUI();
   const [isLoading, setIsLoading] = useState(false);
   const [txHash, setTxHash] = useState<string>();
@@ -31,7 +33,7 @@ export function QuestStepMint({ itemId }: { itemId: string }) {
     api.tonApi.getQuestNftItems.useQuery(
       {
         ownerAddress: address,
-        nftId: itemId,
+        nftId: stepInfo.nft_id?.toString() ?? "",
       },
       {
         refetchOnMount: true,
@@ -63,7 +65,10 @@ export function QuestStepMint({ itemId }: { itemId: string }) {
   }, [userNftItemInfo, userBalance]);
 
   async function mintNextNft() {
-    const token = await getUuid.mutateAsync({ wallet: address, nftId: itemId }); //await getUuid();
+    const token = await getUuid.mutateAsync({
+      wallet: address,
+      nftId: stepInfo.nft_id?.toString() ?? "",
+    }); //await getUuid();
     const transaction = await createMintTransactionPayload(token);
 
     try {
@@ -101,6 +106,13 @@ export function QuestStepMint({ itemId }: { itemId: string }) {
 
   return (
     <>
+      <div className="w-[50%] sm:w-full">
+        <Image
+          alt="NFT image"
+          src={`https://indigo-foreign-manatee-785.mypinata.cloud/ipfs/QmP2srX58NrKRm2aomDtdkhj4uVbBuNFvhQBrWrKqwmFL9/${stepInfo.nft_id}.jpg`}
+        />
+      </div>
+      <h1 className="text-center text-2xl">Now you can collect your NFT!</h1>
       <Button
         isLoading={isLoading || isUserNftInfoLoading || isUserBalanceLoading}
         onClick={mintNextNft}

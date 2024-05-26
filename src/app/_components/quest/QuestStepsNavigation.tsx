@@ -7,15 +7,18 @@ export function QuestStepsNavigation({
   userQuestProgress,
   stepsInfo,
   currentStepInfo,
+  setCurrentStepIndex,
 }: {
   userQuestProgress: UserQuestProgress | null;
   stepsInfo: QuestStep[];
   currentStepInfo?: QuestStep;
+  setCurrentStepIndex: (i: number) => void;
 }) {
   return stepsInfo.map((step, i) => (
     <div
       key={step.step_id}
-      className="relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2"
+      className="relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2 hover:cursor-pointer hover:border-sandyBrown"
+      onClick={() => setCurrentStepIndex(i)}
     >
       <p className="z-10 font-semibold">{step.step_title}</p>
       {userQuestProgress && i <= userQuestProgress?.current_step_order && (

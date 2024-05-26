@@ -34,7 +34,7 @@ export function CheckmarkAnimation() {
       src="https://lottie.host/bcd9adca-b0ec-4e7c-97eb-482acb0d2c0a/PIxEzoF8PI.json"
       loop={false}
       autoplay
-      className="relative w-[30%]"
+      className="relative w-[50%]"
     >
       <DotLottieReact
         src="https://lottie.host/7358dc24-34ac-4feb-b028-795bcd925e85/nP3FQzJ1fs.json"

@@ -1,15 +1,13 @@
 "use client";
 
 import { type Quest, type QuestStep } from "@prisma/client";
-import { QuestStepBody } from "@/app/_components/quest/QuestStepBody";
 import { useEffect, useState } from "react";
 import { api } from "@/trpc/react";
-import { Spinner } from "@nextui-org/react";
-import { CheckmarkAnimation } from "@/app/_components/images/CheckmarkAnimation";
-import { QuestStepMint } from "@/app/_components/quest/QuestStepMint";
+import { Button, Spinner } from "@nextui-org/react";
 
-import { Image } from "@nextui-org/react";
 import { QuestStepsNavigation } from "@/app/_components/quest/QuestStepsNavigation";
+import { QUEST_TYPES } from "@/lib/constants";
+import { type QuestTypesProps } from "@/types/quest-types-props";
 
 export function QuestStepsWrapper({
   stepsInfo,
@@ -22,9 +20,13 @@ export function QuestStepsWrapper({
   const [currentStepInfo, setCurrentStepInfo] = useState<QuestStep | undefined>(
     stepsInfo[currentStepIndex],
   );
+
   const [isLastStep, setIsLastStep] = useState<boolean>(
-    currentStepIndex === stepsInfo.length - 1,
+    currentStepIndex === stepsInfo.length - 2,
   );
+
+  const [isStepReadyToBeCompleted, setIsStepReadyToBeCompleted] =
+    useState<boolean>(false);
 
   const {
     data: userQuestProgress,
@@ -47,9 +49,34 @@ export function QuestStepsWrapper({
   }, [userQuestProgress]);
 
   useEffect(() => {
+    console.log("currentStepIndex", currentStepIndex);
+    console.log("stepsInfo.length", stepsInfo.length);
     setCurrentStepInfo(stepsInfo[currentStepIndex]);
-    setIsLastStep(currentStepIndex === stepsInfo.length - 1);
+    setIsLastStep(currentStepIndex === stepsInfo.length - 2);
   }, [currentStepIndex, stepsInfo]);
+
+  useEffect(() => {
+    if (!userQuestProgress || !currentStepInfo) {
+      setIsStepReadyToBeCompleted(true);
+      return;
+    }
+    if (userQuestProgress?.current_step_order >= currentStepInfo?.step_order) {
+      setIsStepReadyToBeCompleted(true);
+      return;
+    } else if (
+      currentStepInfo?.step_type_id !== 2 &&
+      currentStepInfo?.step_type_id !== 3
+    ) {
+      setIsStepReadyToBeCompleted(true);
+      return;
+    }
+
+    setIsStepReadyToBeCompleted(false);
+  }, [
+    currentStepInfo,
+    userQuestProgress,
+    userQuestProgress?.current_step_order,
+  ]);
 
   async function handleStepChange(amount: number) {
     if (amount > 0 && currentStepInfo) {
@@ -71,6 +98,13 @@ export function QuestStepsWrapper({
 
   if (!currentStepInfo && !userQuestProgress?.completed) return null;
 
+  function renderStep(props: QuestTypesProps) {
+    if (currentStepInfo?.step_type_id) {
+      const QuestComponent = QUEST_TYPES[currentStepInfo?.step_type_id];
+      return QuestComponent ? <QuestComponent {...props} /> : null;
+    }
+  }
+
   return (
     <div className="grid h-full min-h-[50vh]	w-full grid-cols-3 gap-x-5 sm:flex">
       <div className="col-span-1 flex h-full flex-col justify-end gap-2 sm:hidden">
@@ -80,47 +114,45 @@ export function QuestStepsWrapper({
             userQuestProgress={userQuestProgress}
             stepsInfo={stepsInfo}
             currentStepInfo={currentStepInfo}
+            setCurrentStepIndex={setCurrentStepIndex}
           />
         )}
       </div>
       <div className="col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5 sm:p-2">
-        {isLoadingUserProgress ? (
-          <Spinner />
-        ) : !!userQuestProgress?.completed ? (
-          questInfo.nft_id ? (
-            <>
-              <div className="w-[50%] sm:w-full">
-                <Image
-                  alt="NFT image"
-                  src={`https://indigo-foreign-manatee-785.mypinata.cloud/ipfs/QmP2srX58NrKRm2aomDtdkhj4uVbBuNFvhQBrWrKqwmFL9/${questInfo.nft_id}.jpg`}
-                />
-              </div>
-              <h1 className="text-center text-2xl">
-                Now you can collect your NFT!
-              </h1>
-              <QuestStepMint itemId={questInfo.nft_id} />
-            </>
-          ) : (
-            <>
-              <CheckmarkAnimation />
-              <h1 className="text-2xl">You&apos;ve done it!</h1>
-            </>
-          )
-        ) : (
-          !userQuestProgress?.completed &&
-          currentStepInfo && (
-            <QuestStepBody
-              isLastStep={isLastStep}
-              stepInfo={currentStepInfo}
-              handleStepChange={handleStepChange}
-              isButtonLoading={sendStepCompleted.isPending}
-              isStepCompleted={Boolean(
-                userQuestProgress &&
-                  currentStepInfo.step_order <
-                    userQuestProgress?.current_step_id,
+        {isLoadingUserProgress && <Spinner />}
+        {!isLoadingUserProgress &&
+          currentStepInfo &&
+          renderStep({
+            stepInfo: currentStepInfo,
+            isCompleted: userQuestProgress
+              ? userQuestProgress?.current_step_order >=
+                currentStepInfo.step_order
+              : false,
+            setIsStepReadyToBeCompleted: setIsStepReadyToBeCompleted,
+          })}
+        {!isLoadingUserProgress && currentStepInfo && (
+          <div className="mt-auto flex w-full flex-row">
+            {currentStepInfo?.step_order > 0 &&
+              currentStepInfo?.step_order < stepsInfo.length - 1 && (
+                <Button
+                  onClick={() => handleStepChange(-1)}
+                  className="bg-secondary font-bold text-[#F0FFF0]"
+                >
+                  Back
+                </Button>
               )}
-            />
-          )
+            {currentStepInfo?.step_order < stepsInfo.length - 1 && (
+              <Button
+                onClick={() => handleStepChange(1)}
+                isDisabled={!isStepReadyToBeCompleted}
+                className="ml-auto font-bold"
+                color="primary"
+                isLoading={sendStepCompleted.isPending}
+              >
+                {isLastStep ? "Finish" : "Next"}
+              </Button>
+            )}
+          </div>
         )}
       </div>
     </div>
