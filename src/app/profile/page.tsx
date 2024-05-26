@@ -97,7 +97,7 @@ export default function ProfilePage() {
             </div>
           </div>
           <div>
-            <div className="">
+            <div>
               {isUserDataLoading ? (
                 <Spinner />
               ) : (

@@ -33,7 +33,7 @@ export default function Home() {
   const questHighlight = allQuests?.data?.at(0);
 
   return (
-    <main className="relative mt-10 flex h-full min-h-[80vh] w-full max-w-[1024px] flex-col items-center self-center px-6 pb-5 sm:px-3">
+    <main className="relative mt-10 flex h-full min-h-[80vh] w-full max-w-[1024px] flex-col items-center justify-center self-center px-6 pb-5 sm:px-3">
       {showPopup && (
         <div className="rounder-md absolute right-5 top-0 flex animate-bounce flex-col items-center justify-center px-3 py-2">
           <FontAwesomeIcon icon={faArrowUp} />
