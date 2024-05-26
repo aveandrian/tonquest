@@ -14,11 +14,15 @@ export function QuestStepsNavigation({
   currentStepInfo?: QuestStep;
   setCurrentStepIndex: (i: number) => void;
 }) {
+  function handleStepClick(i: number) {
+    if (userQuestProgress && userQuestProgress?.current_step_order < i) return;
+    setCurrentStepIndex(i);
+  }
   return stepsInfo.map((step, i) => (
     <div
       key={step.step_id}
-      className="relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2 hover:cursor-pointer hover:border-sandyBrown"
-      onClick={() => setCurrentStepIndex(i)}
+      className={`relative flex grid-cols-1 items-center justify-between rounded-md border-2 border-solid border-peachYellow bg-peachYellow p-2 ${userQuestProgress && userQuestProgress?.current_step_order >= i && "hover:cursor-pointer hover:border-sandyBrown"}`}
+      onClick={() => handleStepClick(i)}
     >
       <p className="z-10 font-semibold">{step.step_title}</p>
       {userQuestProgress && i <= userQuestProgress?.current_step_order && (
