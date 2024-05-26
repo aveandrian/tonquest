@@ -14,6 +14,7 @@ import { Toaster } from "sonner";
 import { NavbarMain } from "@/app/_components/navbar/NavbarMain";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 config.autoAddCss = false;
 
@@ -57,6 +58,7 @@ export default async function RootLayout({
                   <Toaster position="top-right" richColors />
                   <NavbarMain />
                   {children}
+                  <GoogleAnalytics gaId="G-25RJWZW92Q" />
                 </NextUIProvider>
               </TonBackendProvider>
             </ContextSessionProvider>
