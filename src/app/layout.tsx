@@ -29,7 +29,7 @@ export const metadata = {
     "TONquest: Your Gateway to Adventure and Rewards! Embark on quests, earn XP, collect exclusive NFTs, and join a vibrant community. Explore the immersive world of TONquest today!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
   twitter: {
-    card: "summary_large_image",
+    card: "summary",
     title: "TONquest",
     description:
       "TONquest: Your Gateway to Adventure and Rewards! Embark on quests, earn XP, collect exclusive NFTs, and join a vibrant community. Explore the immersive world of TONquest today!",
