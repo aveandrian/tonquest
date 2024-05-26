@@ -28,6 +28,30 @@ export const metadata = {
   description:
     "TONquest: Your Gateway to Adventure and Rewards! Embark on quests, earn XP, collect exclusive NFTs, and join a vibrant community. Explore the immersive world of TONquest today!",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
+  twitter: {
+    card: "summary_large_image",
+    title: "TONquest",
+    description:
+      "TONquest: Your Gateway to Adventure and Rewards! Embark on quests, earn XP, collect exclusive NFTs, and join a vibrant community. Explore the immersive world of TONquest today!",
+    creator: "@aveandrian",
+    images: ["https://tonquest.vercel.app/seo_image.png"], // Must be an absolute URL
+  },
+  openGraph: {
+    title: "TONquest",
+    description:
+      "TONquest: Your Gateway to Adventure and Rewards! Embark on quests, earn XP, collect exclusive NFTs, and join a vibrant community. Explore the immersive world of TONquest today!",
+    url: "https://tonquest.vercel.app",
+    siteName: "TONquest",
+    images: [
+      {
+        url: "https://tonquest.vercel.app/seo_image.png", // Must be an absolute URL
+        width: 1988,
+        height: 614,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default async function RootLayout({
@@ -39,13 +63,6 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <head>
-        <script
-          defer
-          src="https://cloud.umami.is/script.js"
-          data-website-id="02ac0f1d-adf8-4338-8153-347030b4eeec"
-        ></script>
-      </head>
       <body
         className={`min-h-screen font-sans ${inter.variable}  bg-background text-foreground light `}
         suppressHydrationWarning={true}
