@@ -73,10 +73,8 @@ export function QuestStepsWrapper({
 
   return (
     <div className="grid h-full min-h-[50vh]	w-full grid-cols-3 gap-x-5 sm:flex">
-      <div
-        className={`col-span-1 ${!isLoadingUserProgress ? "mt-auto" : "justify-center"} flex h-fit flex-col gap-1 sm:hidden`}
-      >
-        {isLoadingUserProgress && <Spinner className="justify-center" />}
+      <div className="col-span-1 flex h-full flex-col justify-end gap-2 sm:hidden">
+        {isLoadingUserProgress && <Spinner className="mb-[50%]" />}
         {!isLoadingUserProgress && userQuestProgress !== undefined && (
           <QuestStepsNavigation
             userQuestProgress={userQuestProgress}
