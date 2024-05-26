@@ -45,8 +45,8 @@ export const metadata = {
     images: [
       {
         url: "https://tonquest.vercel.app/seo_image.png", // Must be an absolute URL
-        width: 1988,
-        height: 614,
+        width: 1492,
+        height: 932,
       },
     ],
     locale: "en_US",
