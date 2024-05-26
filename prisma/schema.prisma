@@ -70,6 +70,7 @@ model User {
     twitterHandle     String?
     discordHandle     String?
     UserQuestProgress UserQuestProgress[]
+    totalXP           Int                 @default(0) // New field for total XP
 }
 
 model VerificationToken {
@@ -102,6 +103,7 @@ model Quest {
     steps             QuestStep[]
     UserQuestProgress UserQuestProgress[]
     nft_id            String?             @unique
+    xp_points         Int                 @default(0) // New field for XP points
 }
 
 model QuestStep {
@@ -135,6 +137,8 @@ model UserQuestProgress {
     step               QuestStep @relation(fields: [current_step_id], references: [step_id])
     completed          Boolean
     current_step_order Int
+    xp_claimed         Boolean   @default(false) // New field for claimed XP
+    nft_claimed        Boolean   @default(false) // New field for claimed XP
 
     @@unique([userId, quest_id])
 }
