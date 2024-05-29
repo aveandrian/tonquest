@@ -9,4 +9,4 @@ Explore the immersive world of TONquest today!
  
 <hr>
 
-Build with [T3 Stack](https://create.t3.gg/), [NextUI](https://nextui.org/)
+Build with [T3 Stack](https://create.t3.gg/), [NextUI](https://nextui.org/), [PostgreSQL](https://www.postgresql.org/), [Tailwind CSS](https://tailwindcss.com/), [@tonconnect-ui/react](https://ton-connect.github.io/sdk/modules/_tonconnect_ui_react.html), [NextAuth](https://next-auth.js.org/)
