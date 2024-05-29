@@ -35,7 +35,7 @@ export function RemoveAccountButton({ provider }: { provider: string }) {
   return (
     <>
       <Button
-        className="ml-auto font-bold sm:text-xs"
+        className="ml-auto font-bold sm:ml-0 sm:text-xs"
         color="danger"
         isLoading={removeAccount.isPending}
         onClick={() =>

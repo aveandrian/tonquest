@@ -17,6 +17,7 @@ import Link from "next/link";
 export function NavbarMain() {
   const { data: session, status } = useSession();
   const pathname = usePathname();
+
   return (
     <Navbar position="static" className="text-blue">
       <NavbarContent>
@@ -33,22 +34,26 @@ export function NavbarMain() {
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="gap-4 sm:hidden" justify="center">
-        <NavbarItem>
-          <Link
-            href="/"
-            className={`link ${pathname === "/" ? "underline decoration-double	underline-offset-2	" : ""} font-semibold `}
-          >
-            Explore
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link
-            href="/score"
-            className={`link ${pathname === "/score" ? "underline decoration-double	underline-offset-2	" : ""} font-semibold `}
-          >
-            Score
-          </Link>
-        </NavbarItem>
+        {session && (
+          <>
+            <NavbarItem>
+              <Link
+                href="/"
+                className={`link ${pathname === "/" ? "underline decoration-double	underline-offset-2	" : ""} font-semibold `}
+              >
+                Explore
+              </Link>
+            </NavbarItem>
+            <NavbarItem>
+              <Link
+                href="/score"
+                className={`link ${pathname === "/score" ? "underline decoration-double	underline-offset-2	" : ""} font-semibold `}
+              >
+                Score
+              </Link>
+            </NavbarItem>
+          </>
+        )}
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="lg:flex">
