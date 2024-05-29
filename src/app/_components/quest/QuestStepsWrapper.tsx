@@ -49,8 +49,6 @@ export function QuestStepsWrapper({
   }, [userQuestProgress]);
 
   useEffect(() => {
-    console.log("currentStepIndex", currentStepIndex);
-    console.log("stepsInfo.length", stepsInfo.length);
     setCurrentStepInfo(stepsInfo[currentStepIndex]);
     setIsLastStep(currentStepIndex === stepsInfo.length - 2);
   }, [currentStepIndex, stepsInfo]);

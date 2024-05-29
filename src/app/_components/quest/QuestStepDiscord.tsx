@@ -20,7 +20,6 @@ export function QuestStepDiscord({
   const [isFollowClicked, setIsFollowClicked] = useState<boolean>(isCompleted);
 
   function handleFollow() {
-    console.log("NOW WE GONNA SET TO TRUE");
     setIsFollowClicked(true);
     setIsStepReadyToBeCompleted(true);
   }
