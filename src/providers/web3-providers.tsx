@@ -27,7 +27,7 @@ export const config = createConfig({
       metadata,
       showQrModal: false,
     }),
-    injected({ shimDisconnect: true }),
+    injected(),
   ],
   ssr: true,
 });
