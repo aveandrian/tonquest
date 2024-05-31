@@ -22,7 +22,7 @@ config.autoAddCss = false;
 const chakra_petch = Chakra_Petch({
   weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
-  variable: "--font-sans",
+  variable: "--font-chakra",
 });
 
 export const metadata = {
@@ -66,7 +66,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`min-h-lvh ${chakra_petch.variable} bg-background text-foreground light `}
+        className={`min-h-lvh font-sans ${chakra_petch.variable} bg-background text-foreground light `}
         suppressHydrationWarning={true}
       >
         <Providers>

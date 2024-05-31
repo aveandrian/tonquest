@@ -37,6 +37,9 @@ export default {
       backgroundImage: {
         "hero-pattern": "url('bg-main.png')",
       },
+      fontFamily: {
+        sans: ["var(--font-chakra)"],
+      },
     },
   },
   plugins: [

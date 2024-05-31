@@ -6,6 +6,14 @@ import { WagmiProvider, createConfig, http } from "wagmi";
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { mainnet, sepolia } from "wagmi/chains";
+import { walletConnect, injected } from "wagmi/connectors";
+
+const metadata = {
+  name: "TONquest",
+  description: "Embark on quests!",
+  url: "https://tonquest.vercel.com",
+  icons: ["https://tonquest.vercel.com/favicon.ico"],
+};
 
 export const config = createConfig({
   chains: [mainnet, sepolia],
@@ -13,6 +21,15 @@ export const config = createConfig({
     [mainnet.id]: http(),
     [sepolia.id]: http(),
   },
+  connectors: [
+    walletConnect({
+      projectId: "25d5282c04f566a3e951b9a222f351b8",
+      metadata,
+      showQrModal: false,
+    }),
+    injected({ shimDisconnect: true }),
+  ],
+  ssr: true,
 });
 
 export function Providers(props: { children: ReactNode }) {
