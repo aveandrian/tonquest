@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import "@/styles/globals.css";
 
-import { Inter } from "next/font/google";
+import { Chakra_Petch } from "next/font/google";
 
 import { TRPCReactProvider } from "@/trpc/react";
 
@@ -19,7 +19,8 @@ import { ConnectKitWeb3Provider } from "@/providers/connect-kit-provider";
 
 config.autoAddCss = false;
 
-const inter = Inter({
+const chakra_petch = Chakra_Petch({
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-sans",
 });
@@ -65,7 +66,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`min-h-lvh font-sans ${inter.variable}  bg-background text-foreground light `}
+        className={`min-h-lvh ${chakra_petch.variable} bg-background text-foreground light `}
         suppressHydrationWarning={true}
       >
         <Providers>
