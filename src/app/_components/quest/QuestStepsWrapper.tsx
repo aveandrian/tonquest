@@ -104,8 +104,8 @@ export function QuestStepsWrapper({
   }
 
   return (
-    <div className="grid h-full min-h-[50vh]	w-full grid-cols-3 gap-x-5 sm:flex">
-      <div className="col-span-1 flex h-full flex-col justify-end gap-2 sm:hidden">
+    <div className="grid h-fit min-h-[55vh] w-full grid-cols-3 gap-x-5 sm:flex">
+      <div className="col-span-1 flex flex-col justify-end gap-2 sm:hidden">
         {isLoadingUserProgress && <Spinner className="mb-[50%]" />}
         {!isLoadingUserProgress && userQuestProgress !== undefined && (
           <QuestStepsNavigation
@@ -116,7 +116,7 @@ export function QuestStepsWrapper({
           />
         )}
       </div>
-      <div className="col-span-2 flex h-full min-h-[50vh] w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5 sm:p-2">
+      <div className="col-span-2 flex w-full flex-col items-center justify-center gap-5 rounded-lg border-5 border-double border-blue p-5 sm:p-2">
         {isLoadingUserProgress && <Spinner />}
         {!isLoadingUserProgress &&
           currentStepInfo &&
