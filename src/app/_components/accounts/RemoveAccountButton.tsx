@@ -28,6 +28,7 @@ export function RemoveAccountButton({ provider }: { provider: string }) {
 
       if (provider === "Ethereum") {
         disconnect();
+        await update({ address: null });
       }
     },
   });

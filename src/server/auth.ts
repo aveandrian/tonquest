@@ -115,6 +115,14 @@ export const authOptions: NextAuthOptions = {
         token.twitter = (session as Record<string, string>)?.twitter;
       }
 
+      if (
+        trigger === "update" &&
+        (session as Record<string, string>)?.address !== undefined
+      ) {
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.address = (session as Record<string, string>)?.address;
+      }
+
       return Promise.resolve(token);
     },
     session: async ({ session, token }) => {

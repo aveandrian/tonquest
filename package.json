@@ -37,6 +37,7 @@
     "@trpc/react-query": "next",
     "@trpc/server": "next",
     "axios": "^1.6.8",
+    "connectkit": "^1.7.3",
     "encoding": "^0.1.13",
     "ethers": "^6.12.1",
     "framer-motion": "^11.1.9",

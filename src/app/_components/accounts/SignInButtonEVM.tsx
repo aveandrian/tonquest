@@ -1,8 +1,9 @@
 "use client";
 import { getCsrfToken, signIn, useSession } from "next-auth/react";
 import { SiweMessage } from "siwe";
-import { useAccount, useChainId, useConnect, useSignMessage } from "wagmi";
-import { injected } from "wagmi/connectors";
+import { useAccount, useChainId, useSignMessage } from "wagmi";
+import { useModal } from "connectkit";
+
 import { useEffect } from "react";
 import { Button } from "@nextui-org/react";
 import { useRouter } from "next-nprogress-bar";
@@ -11,7 +12,7 @@ export function SignInButtonEVM() {
   const { signMessageAsync } = useSignMessage();
   const chainId = useChainId();
   const { address, isConnected } = useAccount();
-  const { connect } = useConnect();
+  const { setOpen } = useModal();
   const { data: session } = useSession();
   const router = useRouter();
 
@@ -52,19 +53,21 @@ export function SignInButtonEVM() {
   }, [isConnected]);
 
   return (
-    <Button
-      color="primary"
-      className="font-bold text-blue"
-      onClick={(e: React.MouseEvent<HTMLElement>) => {
-        e.preventDefault();
-        if (!isConnected) {
-          connect({ connector: injected() });
-        } else {
-          void handleLogin();
-        }
-      }}
-    >
-      {isConnected ? "Sign a message" : "Connect EVM Wallet"}
-    </Button>
+    <>
+      <Button
+        color="primary"
+        className="font-bold text-blue"
+        onClick={(e: React.MouseEvent<HTMLElement>) => {
+          e.preventDefault();
+          if (!isConnected) {
+            setOpen(true);
+          } else {
+            void handleLogin();
+          }
+        }}
+      >
+        {isConnected ? "Sign a message" : "Connect EVM Wallet"}
+      </Button>
+    </>
   );
 }

@@ -1,12 +1,19 @@
 "use client";
 
 import { type ReactNode } from "react";
-import { WagmiProvider } from "wagmi";
-
-import { config } from "@/wagmi";
+import { WagmiProvider, createConfig, http } from "wagmi";
 
 import { TonConnectUIProvider } from "@tonconnect/ui-react";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
+import { mainnet, sepolia } from "wagmi/chains";
+
+export const config = createConfig({
+  chains: [mainnet, sepolia],
+  transports: {
+    [mainnet.id]: http(),
+    [sepolia.id]: http(),
+  },
+});
 
 export function Providers(props: { children: ReactNode }) {
   return (

@@ -15,6 +15,7 @@ import { NavbarMain } from "@/app/_components/navbar/NavbarMain";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import { ConnectKitWeb3Provider } from "@/providers/connect-kit-provider";
 
 config.autoAddCss = false;
 
@@ -64,19 +65,21 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`min-h-screen font-sans ${inter.variable}  bg-background text-foreground light `}
+        className={`min-h-lvh font-sans ${inter.variable}  bg-background text-foreground light `}
         suppressHydrationWarning={true}
       >
         <Providers>
           <TRPCReactProvider>
             <ContextSessionProvider serverSession={serverSession}>
               <TonBackendProvider>
-                <NextUIProvider>
-                  <Toaster position="top-right" richColors />
-                  <NavbarMain />
-                  {children}
-                  <GoogleAnalytics gaId="G-25RJWZW92Q" />
-                </NextUIProvider>
+                <ConnectKitWeb3Provider>
+                  <NextUIProvider>
+                    <Toaster position="top-right" richColors />
+                    <NavbarMain />
+                    {children}
+                    <GoogleAnalytics gaId="G-25RJWZW92Q" />
+                  </NextUIProvider>
+                </ConnectKitWeb3Provider>
               </TonBackendProvider>
             </ContextSessionProvider>
           </TRPCReactProvider>
