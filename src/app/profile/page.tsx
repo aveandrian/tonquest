@@ -87,7 +87,11 @@ export default function ProfilePage() {
               <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start sm:text-sm">
                 {session.user.address ? (
                   <>
-                    <p>{session.user.address}</p>
+                    <p>
+                      {session.user.address.slice(0, 10) +
+                        "..." +
+                        session.user.address.slice(-10)}
+                    </p>
                     <RemoveAccountButton provider="Ethereum" />
                   </>
                 ) : (
