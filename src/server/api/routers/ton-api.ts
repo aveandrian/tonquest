@@ -83,13 +83,13 @@ export const tonApiRouter = createTRPCRouter({
           params: {
             owner_address: input.ownerAddress, //account address,
             collection_address:
-              "kQAWtUxRA9LKDY7H5-iQVOCb_JxmCgBm42F9ACVBr9kQJ_k7",
+              "kQDh1txTT2ohESDX-J3G5zPmNpkEuArqtBPFeMkXkhvaM2dl",
           },
         });
       const foundNft = data.nft_items.find(
         (item) =>
           item.content.uri ===
-          `ipfs://QmebtGwbuzSEANpUbsRUsSWgpJgvjb9FGioFUAGE2hxFxX/${input.nftId}.json`,
+          `ipfs://QmQsdKDLJ7wvqcCccW9kNr6dE4WkHcAvdFXrque7VpVWcU/${input.nftId}.json`,
       );
       return foundNft ?? false;
     }),
