@@ -16,12 +16,25 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import { ConnectKitWeb3Provider } from "@/providers/connect-kit-provider";
+import localFont from "next/font/local";
 
 config.autoAddCss = false;
 
-const chakra_petch = Chakra_Petch({
-  weight: ["300", "400", "500", "600", "700"],
-  subsets: ["latin"],
+const chakra_petch = localFont({
+  src: [
+    {
+      path: "fonts/Chakra_Petch/ChakraPetch-Regular.ttf",
+      weight: "400",
+    },
+    {
+      path: "fonts/Chakra_Petch/ChakraPetch-Bold.ttf",
+      weight: "600",
+    },
+    {
+      path: "fonts/Chakra_Petch/ChakraPetch-Bold.ttf",
+      weight: "700",
+    },
+  ],
   variable: "--font-chakra",
 });
 
@@ -66,7 +79,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`min-h-lvh font-sans ${chakra_petch.variable} bg-background text-foreground light `}
+        className={`min-h-lvh ${chakra_petch.variable} bg-background font-sans text-foreground light `}
         suppressHydrationWarning={true}
       >
         <Providers>
