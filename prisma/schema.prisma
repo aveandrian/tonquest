@@ -71,6 +71,8 @@ model User {
     discordHandle     String?
     UserQuestProgress UserQuestProgress[]
     totalXP           Int                 @default(0) // New field for total XP
+    refferalCode      String              @unique
+    refferedBy        String?
 }
 
 model VerificationToken {

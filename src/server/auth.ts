@@ -27,6 +27,7 @@ import {
 } from "@tonconnect/ui-react";
 
 import { type User as PrismaUser } from "@prisma/client";
+import { generate } from "referral-codes";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -242,26 +243,27 @@ export const authOptions: NextAuthOptions = {
             return isExistingUser;
           }
 
-          if (result.success && !currentUser && !isExistingUser) {
-            console.log("User doesn't exist");
+          // if (result.success && !currentUser && !isExistingUser) {
+          //   console.log("User doesn't exist");
 
-            const newUserModel = await db.user.create({
-              data: {
-                address: currentMessage?.address,
-                name: currentMessage?.address,
-              },
-            });
-            await db.account.create({
-              data: {
-                userId: newUserModel.id,
-                type: "credentials",
-                provider: "Ethereum",
-                providerAccountId: newUserModel.address ?? "",
-              },
-            });
+          //   const newUserModel = await db.user.create({
+          //     data: {
+          //       address: currentMessage?.address,
+          //       name: currentMessage?.address,
+          //     },
+          //   });
+          //   await db.account.create({
+          //     data: {
+          //       userId: newUserModel.id,
+          //       type: "credentials",
+          //       provider: "Ethereum",
+          //       providerAccountId: newUserModel.address ?? "",
+          //     },
+          //   });
 
-            return newUserModel;
-          } else if (result.success && currentUser && !currentUser.address) {
+          //   return newUserModel;
+          // } else
+          if (result.success && currentUser && !currentUser.address) {
             console.log("User exist but doesn't have address");
             const updatedUser = await db.user.update({
               where: {
@@ -302,12 +304,22 @@ export const authOptions: NextAuthOptions = {
           label: "Message",
           type: "object",
         },
+        refferedBy: {
+          label: "refferedBy",
+          type: "string",
+        },
       },
       authorize: async (credentials) => {
         try {
           const walletInfo: Wallet | null = JSON.parse(
             credentials?.walletInfo ?? "{}",
           );
+
+          const refferedBy: string = credentials?.refferedBy ?? "";
+          const referralCode = generate({
+            length: 8,
+            count: 1,
+          });
 
           if (!walletInfo) return null;
 
@@ -353,6 +365,8 @@ export const authOptions: NextAuthOptions = {
               data: {
                 ton_address: walletInfo.account.address,
                 name: walletInfo.account.address,
+                refferalCode: referralCode[0] ?? "",
+                refferedBy: refferedBy,
               },
             });
 

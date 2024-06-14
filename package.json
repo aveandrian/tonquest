@@ -49,6 +49,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-markdown": "^9.0.1",
+    "referral-codes": "^3.0.0",
     "server-only": "^0.0.1",
     "siwe": "^2.3.2",
     "sonner": "^1.4.41",

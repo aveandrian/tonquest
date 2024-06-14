@@ -14,6 +14,8 @@ import { SignInButtonTwitter } from "@/app/_components/accounts/SignInButtonTwit
 import { SignOutButton } from "@/app/_components/accounts/SignOutButton";
 import { api } from "@/trpc/react";
 import { Spinner } from "@nextui-org/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCopy } from "@fortawesome/free-solid-svg-icons";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -35,11 +37,21 @@ export default function ProfilePage() {
   const { data: userData, isLoading: isUserDataLoading } =
     api.user.getUser.useQuery();
 
+  const { data: refferalsData, isLoading: isRefferalsDataLoading } =
+    api.user.getRefferals.useQuery();
+
   const userFriendlyAddress =
     session.user.tonAddress && toUserFriendlyAddress(session.user.tonAddress);
   const truncatedAddress =
     userFriendlyAddress &&
     userFriendlyAddress.slice(0, 10) + "..." + userFriendlyAddress.slice(-10);
+
+  const copyRefLink = () => {
+    void navigator.clipboard.writeText(
+      `https://tonquest.vercel.app/?ref=${userData?.refferalCode}`,
+    );
+    toast.success("Copied!");
+  };
   return (
     <main className=" flex h-full min-h-[80vh] w-full flex-col items-center px-6">
       <div className="mt-10 flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
@@ -102,12 +114,29 @@ export default function ProfilePage() {
           </div>
           <div>
             <div>
-              {isUserDataLoading ? (
+              {isUserDataLoading || isRefferalsDataLoading ? (
                 <Spinner />
               ) : (
-                <p className="text-xl	 font-semibold  sm:text-base">
-                  Total XP: {userData?.totalXP}
-                </p>
+                <div className="flex flex-col gap-5 p-5">
+                  <p className="text-xl	 font-semibold  sm:text-base">
+                    Total XP: {userData?.totalXP}
+                  </p>
+                  <p className="text-xl	font-semibold  sm:text-base">
+                    Your refferals: {refferalsData}
+                  </p>
+                  <div className="flex flex-col gap-1">
+                    <p className="text-xl	font-semibold  sm:text-base">
+                      Your refferal link: <br />
+                    </p>
+                    <div
+                      className="flex items-center gap-2 hover:cursor-pointer"
+                      onClick={copyRefLink}
+                    >
+                      <p className="font-normal">{`https://tonquest.vercel.app/?ref=${userData?.refferalCode}`}</p>
+                      <FontAwesomeIcon icon={faCopy} />
+                    </div>
+                  </div>
+                </div>
               )}
             </div>
           </div>

@@ -56,8 +56,10 @@ export function useBackendAuth() {
       wallet.connectItems?.tonProof &&
       !("error" in wallet.connectItems.tonProof)
     ) {
+      const refferal = localStorage.getItem("ref");
       void signIn("ton", {
         walletInfo: JSON.stringify(wallet),
+        refferedBy: refferal,
       });
     } else {
       void tonConnectUI.disconnect();

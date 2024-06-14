@@ -4,15 +4,18 @@ import { Button, Spinner } from "@nextui-org/react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next-nprogress-bar";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { api } from "@/trpc/react";
 import { QuestCard } from "@/app/_components/quest/QuestCard";
 import { QuestCardHighlight } from "@/app/_components/quest/QuestCardHighlight";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
   const { data: session } = useSession();
 
   const [showPopup, setShowPopup] = useState<boolean>(false);
@@ -23,6 +26,11 @@ export default function Home() {
       setTimeout(() => setShowPopup(false), 3000);
     } else router.push("quest/first-quest");
   }
+
+  useEffect(() => {
+    if (searchParams.get("ref"))
+      localStorage.setItem("tonquest-ref", searchParams.get("ref") ?? "");
+  }, [searchParams]);
 
   const completedQuestsByUser = session
     ? api.quest.getCompletedQuestsByUser.useQuery()
