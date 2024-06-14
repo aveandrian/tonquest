@@ -31,6 +31,7 @@ export function NavbarMain() {
             <TonQuestLogo />
             <p className="font-bold text-blue text-inherit">TONquest</p>
           </Link>
+          <p className="ml-1 mt-auto text-xs">*testnet</p>
         </NavbarBrand>
       </NavbarContent>
       <NavbarContent className="gap-4 sm:hidden" justify="center">
