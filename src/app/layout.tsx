@@ -1,8 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import "@/styles/globals.css";
 
-import { Chakra_Petch } from "next/font/google";
-
 import { TRPCReactProvider } from "@/trpc/react";
 
 import { Providers } from "@/providers/web3-providers";

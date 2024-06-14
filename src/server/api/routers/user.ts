@@ -10,8 +10,11 @@ export const userRouter = createTRPCRouter({
     const currentUser = await ctx.db.user.findUnique({
       where: { id: ctx.session.user.id },
     });
+    if (!currentUser?.refferalCode) return 0;
     return ctx.db.user.count({
-      where: { refferedBy: currentUser?.refferalCode as string },
+      where: {
+        refferedBy: currentUser.refferalCode,
+      },
     });
   }),
 });
