@@ -3,7 +3,10 @@
 import { type ReactNode } from "react";
 import { WagmiProvider, createConfig, http } from "wagmi";
 
-import { TonConnectUIProvider } from "@tonconnect/ui-react";
+import {
+  ActionConfiguration,
+  TonConnectUIProvider,
+} from "@tonconnect/ui-react";
 import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { mainnet, sepolia } from "wagmi/chains";
 import { walletConnect, injected } from "wagmi/connectors";
@@ -32,12 +35,17 @@ export const config = createConfig({
   ssr: true,
 });
 
+const returnAction: ActionConfiguration = {
+  returnStrategy: "back",
+};
+
 export function Providers(props: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <TonConnectUIProvider
         manifestUrl="https://tonquest.vercel.app/tonconnect-manifest.json"
         restoreConnection={true}
+        actionsConfiguration={returnAction}
       >
         {props.children}
         <ProgressBar
