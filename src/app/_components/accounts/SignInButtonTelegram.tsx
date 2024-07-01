@@ -2,7 +2,6 @@
 
 import { signIn, useSession } from "next-auth/react";
 import { LoginButton } from "@telegram-auth/react";
-import { cn } from "@nextui-org/react";
 
 export function SignInButtonTelegram() {
   const { data: session } = useSession();
@@ -14,7 +13,7 @@ export function SignInButtonTelegram() {
         console.log("auth callback", data);
         void signIn("telegram-login", {
           callbackUrl: "/profile",
-          telegramData: data,
+          telegramData: JSON.stringify(data),
           currentUser: session?.user ? JSON.stringify(session?.user) : null,
         });
       }}

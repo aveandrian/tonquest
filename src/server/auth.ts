@@ -397,8 +397,8 @@ export const authOptions: NextAuthOptions = {
       name: "Telegram",
       credentials: {
         telegramData: {
-          label: "TelegramData",
-          type: "object",
+          label: "telegramData",
+          type: "text",
         },
         currentUser: {
           type: "text",
@@ -410,6 +410,8 @@ export const authOptions: NextAuthOptions = {
         const telegramInfo: Record<string, string | number> = JSON.parse(
           credentials?.telegramData ?? "{}",
         );
+
+        console.log("telegramInfo", telegramInfo);
         const currentUser: PrismaUser = JSON.parse(
           credentials?.currentUser ?? "{}",
         );
