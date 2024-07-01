@@ -3,6 +3,8 @@
 import { signIn, useSession } from "next-auth/react";
 import { Button } from "@nextui-org/react";
 import { type TelegramUserData } from "@telegram-auth/server";
+import { useState } from "react";
+import { toast } from "sonner";
 
 declare global {
   interface Window {
@@ -19,8 +21,10 @@ declare global {
 
 export function SignInButtonTelegram() {
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogin = async () => {
+    setIsLoading(true);
     window.Telegram.Login.auth(
       { bot_id: "6488814034", request_access: true },
       async (data) => {
@@ -28,13 +32,19 @@ export function SignInButtonTelegram() {
           // authorization failed
           return;
         }
-
-        // Here you would want to validate data like described there https://core.telegram.org/widgets/login#checking-authorization
-        await signIn("telegram-login", {
-          callbackUrl: "/profile",
-          telegramData: JSON.stringify(data),
-          currentUser: session?.user ? JSON.stringify(session?.user) : null,
-        });
+        try {
+          // Here you would want to validate data like described there https://core.telegram.org/widgets/login#checking-authorization
+          await signIn("telegram-login", {
+            callbackUrl: "/profile",
+            telegramData: JSON.stringify(data),
+            currentUser: session?.user ? JSON.stringify(session?.user) : null,
+          });
+          toast.success("Logged in successfully");
+        } catch (e) {
+          toast.error("Something went wrong");
+        } finally {
+          setIsLoading(false);
+        }
       },
     );
   };
@@ -44,21 +54,10 @@ export function SignInButtonTelegram() {
       color="primary"
       className="font-bold text-blue"
       onClick={handleLogin}
+      isLoading={isLoading}
+      disabled={isLoading}
     >
       Login with Telegram
     </Button>
-    // <LoginButton
-    //   widgetVersion={22}
-    //   cornerRadius={5}
-    //   showAvatar={false}
-    //   botUsername={"tonquest_official_bot"}
-    //   onAuthCallback={(data) => {
-    //     void signIn("telegram-login", {
-    //       callbackUrl: "/profile",
-    //       telegramData: JSON.stringify(data),
-    //       currentUser: session?.user ? JSON.stringify(session?.user) : null,
-    //     });
-    //   }}
-    // />
   );
 }
