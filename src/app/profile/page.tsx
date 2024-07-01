@@ -55,7 +55,7 @@ export default function ProfilePage() {
     toast.success("Copied!");
   };
   return (
-    <main className=" flex h-full min-h-[80vh] w-full flex-col items-center px-6">
+    <main className=" flex h-full min-h-[80vh] w-full flex-col items-center px-6 pb-12">
       <div className="mt-10 flex h-full w-full max-w-[1024px] flex-col items-center justify-center gap-5">
         <h1 className="text-center text-4xl">Profile page</h1>
         <div className="grid w-full grid-cols-2 justify-items-center gap-5 sm:grid-cols-1 sm:justify-items-start ">
