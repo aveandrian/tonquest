@@ -118,7 +118,7 @@ export default function ProfilePage() {
                 {session.user.telegramUsername ? (
                   <>
                     <p>@{session.user.telegramUsername}</p>
-                    <RemoveAccountButton provider="Telegram" />
+                    <RemoveAccountButton provider="telegram" />
                   </>
                 ) : (
                   <SignInButtonTelegram />
