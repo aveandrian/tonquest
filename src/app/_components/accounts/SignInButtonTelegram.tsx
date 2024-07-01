@@ -2,6 +2,7 @@
 
 import { signIn, useSession } from "next-auth/react";
 import { LoginButton } from "@telegram-auth/react";
+import { cn } from "@nextui-org/react";
 
 export function SignInButtonTelegram() {
   const { data: session } = useSession();
@@ -10,6 +11,7 @@ export function SignInButtonTelegram() {
     <LoginButton
       botUsername={"tonquest_official_bot"}
       onAuthCallback={(data) => {
+        console.log("auth callback", data);
         void signIn("telegram-login", {
           callbackUrl: "/profile",
           telegramData: data,

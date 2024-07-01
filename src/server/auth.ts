@@ -394,7 +394,7 @@ export const authOptions: NextAuthOptions = {
 
     CredentialsProvider({
       id: "telegram-login",
-      name: "Telegram Login",
+      name: "Telegram",
       credentials: {
         telegramData: {
           label: "TelegramData",
