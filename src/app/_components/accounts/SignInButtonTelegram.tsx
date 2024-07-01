@@ -5,6 +5,7 @@ import { Button } from "@nextui-org/react";
 import { type TelegramUserData } from "@telegram-auth/server";
 import { useState } from "react";
 import { toast } from "sonner";
+import { env } from "@/env";
 
 declare global {
   interface Window {
@@ -26,7 +27,7 @@ export function SignInButtonTelegram() {
   const handleLogin = async () => {
     setIsLoading(true);
     window.Telegram.Login.auth(
-      { bot_id: "6488814034", request_access: true },
+      { bot_id: env.BOT_ID, request_access: true },
       async (data) => {
         if (!data) {
           // authorization failed

@@ -31,6 +31,7 @@ export const env = createEnv({
     TON_CENTER_KEY: z.string(),
     COLLECTION_OWNER: z.string(),
     BOT_TOKEN: z.string(),
+    BOT_ID: z.string(),
   },
   
 
@@ -60,6 +61,7 @@ export const env = createEnv({
     TON_CENTER_KEY: process.env.TON_CENTER_KEY,
     COLLECTION_OWNER: process.env.COLLECTION_OWNER,
     BOT_TOKEN: process.env.BOT_TOKEN,
+    BOT_ID: process.env.BOT_ID,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
