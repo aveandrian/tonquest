@@ -35,17 +35,15 @@ export const config = createConfig({
   ssr: true,
 });
 
-const returnAction: ActionConfiguration = {
-  returnStrategy: "back",
-};
-
 export function Providers(props: { children: ReactNode }) {
   return (
     <WagmiProvider config={config}>
       <TonConnectUIProvider
         manifestUrl="https://tonquest.vercel.app/tonconnect-manifest.json"
         restoreConnection={true}
-        actionsConfiguration={returnAction}
+        actionsConfiguration={{
+          returnStrategy: "back",
+        }}
       >
         {props.children}
         <ProgressBar
