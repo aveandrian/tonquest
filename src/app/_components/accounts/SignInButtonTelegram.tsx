@@ -8,6 +8,9 @@ export function SignInButtonTelegram() {
 
   return (
     <LoginButton
+      widgetVersion={22}
+      cornerRadius={5}
+      showAvatar={false}
       botUsername={"tonquest_official_bot"}
       onAuthCallback={(data) => {
         console.log("auth callback", data);
