@@ -73,6 +73,8 @@ model User {
     totalXP           Int                 @default(0) // New field for total XP
     refferalCode      String              @unique
     refferedBy        String?
+    telegramId        Int?                @unique
+    telegramUsername  String?
 }
 
 model VerificationToken {

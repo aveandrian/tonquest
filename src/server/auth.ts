@@ -28,6 +28,7 @@ import {
 
 import { type User as PrismaUser } from "@prisma/client";
 import { generate } from "referral-codes";
+import { objectToAuthDataMap, AuthDataValidator } from "@telegram-auth/server";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -388,6 +389,82 @@ export const authOptions: NextAuthOptions = {
           console.error({ error });
           return null;
         }
+      },
+    }),
+
+    CredentialsProvider({
+      id: "telegram-login",
+      name: "Telegram Login",
+      credentials: {
+        telegramData: {
+          label: "TelegramData",
+          type: "object",
+        },
+        currentUser: {
+          type: "text",
+          placeholder: "0x0",
+        },
+      },
+      authorize: async (credentials, req) => {
+        console.log("credentials", credentials);
+        const telegramInfo: Record<string, string | number> = JSON.parse(
+          credentials?.telegramData ?? "{}",
+        );
+        const currentUser: PrismaUser = JSON.parse(
+          credentials?.currentUser ?? "{}",
+        );
+
+        const validator = new AuthDataValidator({
+          botToken: `${env.BOT_TOKEN}`,
+        });
+
+        const data = objectToAuthDataMap(telegramInfo);
+        const user = await validator.validate(data);
+
+        if (user.id && user.first_name) {
+          const returned = {
+            id: user.id,
+            email: user.id.toString(),
+            name: [user.first_name, user.last_name ?? ""].join(" "),
+            image: user.photo_url,
+          };
+
+          try {
+            console.log("user", user);
+
+            const isExistingUser = await db.user.findFirst({
+              where: {
+                telegramId: user.id,
+              },
+            });
+
+            if (isExistingUser) return isExistingUser;
+
+            console.log("User exist but doesn't have telegram id");
+            const updatedUser = await db.user.update({
+              where: {
+                id: currentUser.id,
+              },
+              data: {
+                telegramId: user.id,
+              },
+            });
+
+            await db.account.create({
+              data: {
+                userId: currentUser.id,
+                type: "credentials",
+                provider: "Telegram",
+                providerAccountId: user.id.toString(),
+              },
+            });
+
+            return updatedUser;
+          } catch {
+            console.log("Something went wrong while creating the user.");
+          }
+        }
+        return null;
       },
     }),
 

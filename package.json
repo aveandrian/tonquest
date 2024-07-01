@@ -28,6 +28,8 @@
     "@react-aria/i18n": "^3.11.0",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@tanstack/react-query": "^5.25.0",
+    "@telegram-auth/react": "^1.0.3",
+    "@telegram-auth/server": "^1.0.3",
     "@ton-api/client": "^0.0.1-beta.2",
     "@ton/ton": "^13.11.1",
     "@tonconnect/protocol": "^2.2.6",

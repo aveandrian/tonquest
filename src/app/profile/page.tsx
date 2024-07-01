@@ -16,6 +16,7 @@ import { api } from "@/trpc/react";
 import { Spinner } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
+import { SignInButtonTelegram } from "@/app/_components/accounts/SignInButtonTelegram";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -109,6 +110,12 @@ export default function ProfilePage() {
                 ) : (
                   <SignInButtonEVM />
                 )}
+              </div>
+            </div>
+            <div className="flex w-full flex-col  gap-4">
+              <p className="text-xl	 font-semibold  sm:text-base">EVM Wallet:</p>
+              <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start sm:text-sm">
+                <SignInButtonTelegram />
               </div>
             </div>
           </div>
