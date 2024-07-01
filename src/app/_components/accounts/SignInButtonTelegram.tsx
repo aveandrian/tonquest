@@ -24,29 +24,29 @@ export function SignInButtonTelegram() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleLogin = async () => {
-    setIsLoading(true);
-    window.Telegram.Login.auth(
-      { bot_id: "6488814034", request_access: true },
-      async (data) => {
-        if (!data) {
-          // authorization failed
-          return;
-        }
-        try {
+    try {
+      setIsLoading(true);
+      window.Telegram.Login.auth(
+        { bot_id: "6488814034", request_access: true },
+        async (data) => {
+          if (!data) {
+            // authorization failed
+            return;
+          }
           // Here you would want to validate data like described there https://core.telegram.org/widgets/login#checking-authorization
           await signIn("telegram-login", {
             callbackUrl: "/profile",
             telegramData: JSON.stringify(data),
             currentUser: session?.user ? JSON.stringify(session?.user) : null,
           });
-          toast.success("Logged in successfully");
-        } catch (e) {
-          toast.error("Something went wrong");
-        } finally {
-          setIsLoading(false);
-        }
-      },
-    );
+        },
+      );
+      toast.success("Logged in successfully");
+    } catch (e) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
