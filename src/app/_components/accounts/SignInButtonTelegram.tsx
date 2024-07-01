@@ -1,8 +1,21 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { LoginButton } from "@telegram-auth/react";
 import { Button } from "@nextui-org/react";
+import { type TelegramUserData } from "@telegram-auth/server";
+
+declare global {
+  interface Window {
+    Telegram: {
+      Login: {
+        auth: (
+          params: Record<string, string | boolean>,
+          cb: (data: TelegramUserData) => Promise<void>,
+        ) => void;
+      };
+    };
+  }
+}
 
 export function SignInButtonTelegram() {
   const { data: session } = useSession();
