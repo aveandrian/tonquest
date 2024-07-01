@@ -10,7 +10,7 @@ const PROVIDER_MAP: Record<string, string> = {
   twitter: "twitterHandle",
   Ethereum: "address",
   TON: "ton_address",
-  telegram: "telegramUsername",
+  Telegram: "telegramUsername",
 };
 
 export function RemoveAccountButton({ provider }: { provider: string }) {
@@ -32,8 +32,8 @@ export function RemoveAccountButton({ provider }: { provider: string }) {
         await update({ address: null });
       }
 
-      if (provider === "telegram") {
-        await update({ telgramUsername: null, telegramId: null });
+      if (provider === "Telegram") {
+        await update({ telegramUsername: null });
       }
     },
   });

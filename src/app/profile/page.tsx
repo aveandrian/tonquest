@@ -113,19 +113,16 @@ export default function ProfilePage() {
               </div>
             </div>
             <div className="flex w-full flex-col  gap-4">
-              <p className="text-xl	 font-semibold  sm:text-base">EVM Wallet:</p>
+              <p className="text-xl	 font-semibold  sm:text-base">Telegram:</p>
               <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start sm:text-sm">
-                <div className="flex flex-row items-center justify-between sm:flex-col sm:items-start sm:justify-center sm:gap-2 sm:text-sm">
-                  {session.user.discord ? (
-                    <>
-                      <p>{session.user.telegramUsername}</p>
-                      <RemoveAccountButton provider="telegram" />
-                    </>
-                  ) : (
-                    <SignInButtonDiscord />
-                  )}
-                </div>
-                <SignInButtonTelegram />
+                {session.user.telegramUsername ? (
+                  <>
+                    <p>@{session.user.telegramUsername}</p>
+                    <RemoveAccountButton provider="Telegram" />
+                  </>
+                ) : (
+                  <SignInButtonTelegram />
+                )}
               </div>
             </div>
           </div>

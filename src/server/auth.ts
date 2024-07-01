@@ -127,6 +127,16 @@ export const authOptions: NextAuthOptions = {
         token.address = (session as Record<string, string>)?.address;
       }
 
+      if (
+        trigger === "update" &&
+        (session as Record<string, string>)?.telegramUsername !== undefined
+      ) {
+        // Note, that `session` can be any arbitrary object, remember to validate it!
+        token.telegramUsername = (
+          session as Record<string, string>
+        )?.telegramUsername;
+      }
+
       return Promise.resolve(token);
     },
     session: async ({ session, token }) => {
@@ -408,7 +418,7 @@ export const authOptions: NextAuthOptions = {
           placeholder: "0x0",
         },
       },
-      authorize: async (credentials, req) => {
+      authorize: async (credentials) => {
         console.log("credentials", credentials);
         const telegramInfo: Record<string, string | number> = JSON.parse(
           credentials?.telegramData ?? "{}",
@@ -427,13 +437,6 @@ export const authOptions: NextAuthOptions = {
         const user = await validator.validate(data);
 
         if (user.id && user.first_name) {
-          const returned = {
-            id: user.id,
-            email: user.id.toString(),
-            name: [user.first_name, user.last_name ?? ""].join(" "),
-            image: user.photo_url,
-          };
-
           try {
             console.log("user", user);
 
