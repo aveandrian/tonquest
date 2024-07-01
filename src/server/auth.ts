@@ -438,8 +438,6 @@ export const authOptions: NextAuthOptions = {
 
         if (user.id && user.first_name) {
           try {
-            console.log("user", user);
-
             const isExistingUser = await db.user.findFirst({
               where: {
                 telegramUsername: user.username,

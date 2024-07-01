@@ -17,6 +17,7 @@ import { Spinner } from "@nextui-org/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import { SignInButtonTelegram } from "@/app/_components/accounts/SignInButtonTelegram";
+import Script from "next/script";
 
 export default function ProfilePage() {
   const { data: session } = useSession();
@@ -159,6 +160,7 @@ export default function ProfilePage() {
           <SignOutButton />
         </div>
       </div>
+      <Script src="https://telegram.org/js/telegram-widget.js?22" />
     </main>
   );
 }
