@@ -115,6 +115,16 @@ export default function ProfilePage() {
             <div className="flex w-full flex-col  gap-4">
               <p className="text-xl	 font-semibold  sm:text-base">EVM Wallet:</p>
               <div className="flex flex-row items-center gap-2 sm:flex-col sm:items-start sm:text-sm">
+                <div className="flex flex-row items-center justify-between sm:flex-col sm:items-start sm:justify-center sm:gap-2 sm:text-sm">
+                  {session.user.discord ? (
+                    <>
+                      <p>{session.user.telegramUsername}</p>
+                      <RemoveAccountButton provider="telegram" />
+                    </>
+                  ) : (
+                    <SignInButtonDiscord />
+                  )}
+                </div>
                 <SignInButtonTelegram />
               </div>
             </div>

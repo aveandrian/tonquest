@@ -44,6 +44,7 @@ declare module "next-auth" {
       discord?: string | null;
       twitter?: string | null;
       tonAddress?: string | null;
+      telegramUsername?: string | null;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -98,6 +99,7 @@ export const authOptions: NextAuthOptions = {
           tonAddress: user.ton_address,
           discord: discordHandle,
           twitter: twitterHandle,
+          telegramUsername: user.telegramUsername,
         };
       }
 
@@ -137,6 +139,7 @@ export const authOptions: NextAuthOptions = {
           discord: token.discord,
           twitter: token.twitter,
           tonAddress: token.tonAddress,
+          telegramUsername: token.telegramUsername,
         },
       };
     },
@@ -436,7 +439,7 @@ export const authOptions: NextAuthOptions = {
 
             const isExistingUser = await db.user.findFirst({
               where: {
-                telegramId: user.id,
+                telegramUsername: user.username,
               },
             });
 
@@ -448,7 +451,7 @@ export const authOptions: NextAuthOptions = {
                 id: currentUser.id,
               },
               data: {
-                telegramId: user.id,
+                telegramUsername: user.username,
               },
             });
 
@@ -456,7 +459,7 @@ export const authOptions: NextAuthOptions = {
               data: {
                 userId: currentUser.id,
                 type: "credentials",
-                provider: "Telegram",
+                provider: "telegram",
                 providerAccountId: user.id.toString(),
               },
             });

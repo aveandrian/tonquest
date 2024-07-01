@@ -18,13 +18,5 @@ export function SignInButtonTelegram() {
         });
       }}
     />
-    // <Button
-    //   onClick={tonConnectModal.open}
-    //   color="primary"
-    //   className="font-bold sm:text-xs"
-    //   isLoading={isConnectionRestored && Boolean(wallet)}
-    // >
-    //   Connect TON wallet
-    // </Button>
   );
 }
