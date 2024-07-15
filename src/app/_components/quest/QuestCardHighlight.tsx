@@ -1,7 +1,7 @@
 "use client";
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Card, CardBody, Link, Image } from "@nextui-org/react";
+import { Card, CardBody, Link, Image, Button } from "@nextui-org/react";
 import { useRouter } from "next-nprogress-bar";
 
 export function QuestCardHighlight({
@@ -38,9 +38,18 @@ export function QuestCardHighlight({
           <p className="text-sm text-blue">{questDescription}</p>
         </div>
         <div className="col-span-2 ml-auto mt-auto flex flex-row gap-2">
-          <Link href={`/quest/${questSlug}`} className=" text-blue">
+          <Button
+            as={Link}
+            href={`/quest/${questSlug}`}
+            className="text-sm font-bold text-blue sm:text-xs"
+            color="primary"
+          >
             {isCompleted ? "Completed" : "Start quest"}
-          </Link>
+          </Button>
+
+          {/* <Link href={`/quest/${questSlug}`} className=" text-blue">
+            {isCompleted ? "Completed" : "Start quest"}
+          </Link> */}
           {isCompleted && (
             <FontAwesomeIcon icon={faCheckCircle} color="teal" size="lg" />
           )}
